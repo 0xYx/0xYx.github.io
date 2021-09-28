@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>招聘工程师 | 随想录</title>
+<title>逆向Unity3D Asset Bundle | 随想录</title>
 
 
 
@@ -46,11 +46,107 @@
       
     </div>
     <h2 class="subtitle is-6">September 28, 2021</h2>
-    <h1 class="title">招聘工程师</h1>
+    <h1 class="title">逆向Unity3D Asset Bundle</h1>
     
     <div class="content">
-      <h4 id="什么时候应该招聘">什么时候应该招聘？</h4>
-<p>招聘应该是持续的，不应该等到有hc之后再开始招聘，而应该持续引入优秀的人才。</p>
+      <p>前几个月因为项目的原因，想要看一下一个售卖3D手办的软件是怎么实现的，并且想看看有没有能力获取到里面的3D模型。拿到安装包之后，还是按照惯例直接砸壳调试分析了一下：</p>
+<p><img src="/image/veve/1.png" alt="enter image description here"></p>
+<p>结果启动之后，直接挂了。定位一下，有很明确的关于License的校验：</p>
+<p><img src="/image/veve/2.png" alt="enter image description here"></p>
+<p>打开他的lib文件看一下，从上图能看出，这个ImglyKit 跟PhotoEditorSDK 是依赖关系，因为ImglyKit开了校验，所以直接挂了。这里有意思的是他还提示你应该联系他的销售购买正版授权什么的。
+老办法，用hoppers看一下加载的代码，找到加载入口，然后用logos把这一块加载的代码干掉再说：</p>
+<pre tabindex="0"><code>%hook RNPESDKImglyKit
+- (void)unlockWithLicense:(id)license
+{
+// 实际上是这个导致的，我们让他不要调用原来的方法
+    NSLog(@&quot;hook unlockWithLicense&quot;);
+    %log;
+}
+%end
+</code></pre><p>处理之后果然，这里可以看到bundleid 是不一样的：</p>
+<p><img src="/image/veve/3.png" alt="enter image description here"></p>
+<p>下一步又受阻了，检测到越狱，不给调试：</p>
+<p><img src="/image/veve/4.png" alt="enter image description here"></p>
+<p>这还不是一个简单的遮罩，看起来是检查到越狱直接不给调试了。大胆猜测一下，不会有一个函数叫jailBroken吧：</p>
+<p><img src="/image/veve/5.png" alt="enter image description here"></p>
+<p>真的有，那么把他也干掉：</p>
+<pre tabindex="0"><code>%hook JailMonkey
+
+- (BOOL)isJailBroken
+{
+    NSLog(@&quot;hook isJailBroken&quot;);
+    %log;
+    return NO;
+}
+%end
+</code></pre><p>搞定，接下来就是分析他的渲染以及使用的模型：</p>
+<blockquote>
+<p><strong>2021-06-17 16:58:49.674491+0800 Veve[2816:236864] -[&lt;RNUnityView: 0x10fd2b9e0&gt; setUnityView:&lt;UnityView: 0x11d5ce960; frame = (0 0; 375 812); autoresize = W+H; layer = &lt;CAMetalLayer: 0x283c3be60&raquo;]</strong></p>
+</blockquote>
+<p>分析发现他渲染是用的Unity,底层是CAMetalLayer，但是这些都不重要，我的目标是搞到他渲染的模型。一期到这里的时候就卡住了，原因是我没有办法找到这个unity渲染的入口函数，只能知道他是用什么做渲染的显然是不够的。为了解决这个问题，我们可以从UnityFramework这个库着手分析看看。继续用hoppers逆向分析一下这个库看一下：</p>
+<p><img src="/image/veve/6.png" alt="enter image description here"></p>
+<p>可以看出他并没有很顺利的拿到符号，反而分析出了一堆 sub_hex 的地址一样的函数名。如果符号也没有，那下一步应该怎么走呢？这个时候我的思路还是想回到原理，看一下unity是怎么打包的。所以接下来介绍三个概念：</p>
+<ol>
+<li>iL &ndash; 中间代码，各种语言都可以编译成中间代码，然后再根据平台特性转化为最终代码</li>
+<li>mono虚拟机 &ndash; 包含把C# 代码转化为iL 中间代码的工具，跨平台的运行.Net环境，支持JIT</li>
+<li>il2cpp &ndash; 把C#代码转化为cpp代码，只支持AoT</li>
+</ol>
+<p>想详细了解可以看这篇文章：<a href="https://zhuanlan.zhihu.com/p/352463394">Mono和IL2CPP的区别</a> 以及还有两个概念JIT跟AOT我推荐看这篇文章，说的非常好：<a href="https://www.cnblogs.com/murongxiaopifu/p/4278947.html">谁偷了我的热更新？Mono，JIT，iOS</a></p>
+<p>众所周知，unity的游戏使用C#写的，并不是cpp。但是unity之所以能实现跨平台，就是基于mono 跟 il2cpp 这两个工具。自从16年之后，il2cpp因为性能更好已经逐渐被大家采用，但是与此同时，il2cpp本身也有一定的性能安全问题，这也就让想要做逆向分析的人有了机会。</p>
+<p>我们想要dump出UnityAsset, 那么可以怎么办呢。下面再介绍两个工具：</p>
+<ol>
+<li><a href="https://frida.re/">Frida</a>  &ndash; 一款很好用的远程调试工具</li>
+<li><a href="https://github.com/Perfare/Il2CppDumper">Il2cppDumper</a>  &ndash; 帮助我们把il2cpp转好的cpp符号再还原回来</li>
+</ol>
+<p>这里C#转好的cpp函数在<code>UnityFramework.framework</code>这个静态库下，我们对他做一下il2cppdump看看：</p>
+<p><img src="/image/veve/7.png" alt="enter image description here"></p>
+<p>可以看到dump出来的文件包含一个<code>dump.cs</code> 以及 <code>DummyDll</code>文件夹，<code>dump.cs</code> 我们可以用VSCode打开，里面包含了原C#函数符号以及对应的地址。也可以通过ida打开 <code>Assembly-Csharp.i64</code>这个文件，同样也是逆向好的符号。
+虽然这样就拿到了源符号，但是这就像茫茫大海，应该从哪里入手？所以我们首先分析一下Unity加载资源的方法，Unity 是使用AssetBundle加载资源的，我首先去找了一下Unity的官方API，官网给出了一个加密Asset的方案：</p>
+<p><img src="/image/veve/8.png" alt="enter image description here"></p>
+<p>注意看上面红框里面的 <code>AssetBundle.loadFromMemory(decryptedBytes)</code> 函数，看来这个<code>decryptedBytes</code> 就是我们要寻找的目标了。再来看一下<code>dump.cs</code>文件：</p>
+<p><img src="/image/veve/9.png" alt="enter image description here"></p>
+<p>Bingo！找到了目标函数，他的地址在 <code>0x16E3FB8</code>，这下我们就可以去通过Frida开始着手去分析这个是否就是我们想要的目标了。</p>
+<pre tabindex="0"><code>john@JOHNSSONG-MB0 ~ % frida-trace -U veve -a &quot;UnityFramework\!0x16e3fb8&quot;
+
+ **Instrumenting...**                                                         
+
+// Frida 帮你生成了一个handler js
+sub_16e3fb8: Loaded handler at &quot;/Users/john/__handlers__/UnityFramework/sub_16e3fb8.js&quot;
+
+ **Started tracing 1 function. Press Ctrl+C to stop.**
+</code></pre><p>通过<code>frida-trace -a</code> 可以追踪第三方库+对应偏移地址的函数，这个时候frida会自动生成一个jshandler, 我们可以通过这个这个文件去使用js注入我们的代码，这里我们想看一下这个decrypt函数是否是我们的目标，可以在 <code>onEnter()</code>插入我们的dump代码：</p>
+<pre tabindex="0"><code>onEnter(log, args, state) {
+    log('sub_16e3fb8()');
+    log(&quot;[-] hook invoked&quot;);
+    log(JSON.stringify({
+                        a0: args[0],
+                    }, null, '\t'));
+    var dump = Memory.readByteArray(args[0], 0x100);
+    log(&quot;result:&quot; + hexdump(dump));
+  },
+</code></pre><p>再看一下输出的结果：</p>
+<p><img src="/image/veve/10.png" alt="enter image description here"></p>
+<p>看来我们找对了方向，现在还剩下最后两个问题：</p>
+<h4 id="1-获取文件长度">1. 获取文件长度</h4>
+<p>跟有经验的同学请教，发现文件长度就在这几个字节，这是应该是这个格式的一种规范：</p>
+<p><img src="/image/veve/11.png" alt="enter image description here"></p>
+<h4 id="2-dump文件">2. dump文件</h4>
+<p>这里我尝试了两种办法，第一种通过Frida创建dump文件，然后再使用爱思助手把文件拿出来。但是因为文件权限的问题一直写入失败。因为iOS机器已经越狱，并且使用了MonkeyDev ，所以我的另一个思路就是直接通过LLDB来把这个文件拿出来。
+使用LLDB的思路就是通过设置一个断点，在<code>loadFromMemory(decryptedBytes)</code>函数执行的时候，把x0地址对应的内存转换为NSData dump出来。
+首先打一个符号端点：</p>
+<pre><code>``` 
+(lldb) br s -a 0x107BC3FB8
+Breakpoint 2: where = UnityFramework`___lldb_unnamed_symbol122084$$UnityFramework, address = 0x0000000107bc3fb8
+```
+
+然后dump对应的文件：
+
+
+``` 
+po [[NSData dataWithBytes:(id)0x0000000139a25000 length:0x43563a] writeToFile:@&quot;/var/mobile/Containers/Data/Application/5520D425-CA51-47FB-AF93-172E1C2258CB/Documents/veve.ab&quot; atomically:YES]
+```
+</code></pre>
+<p>到此我就拿到了<code>veve.ab</code>这个Unity文件，成功。</p>
 
       
     </div>
