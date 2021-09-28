@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>0xYx</title>
-    <link>https://0xYx.github.com/</link>
+    <link>https://0xYx.github.io/</link>
     <description>Recent content on 0xYx</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; &lt;a href=&#34;http://www.yingxinsong.com&#34;&gt;yingxinsong&lt;/a&gt; 2021</copyright>
-    <lastBuildDate>Tue, 28 Sep 2021 12:36:50 +0800</lastBuildDate><atom:link href="https://0xYx.github.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 28 Sep 2021 12:36:50 +0800</lastBuildDate><atom:link href="https://0xYx.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>逆向Unity3D Asset Bundle</title>
-      <link>https://0xYx.github.com/post/first-post/</link>
+      <link>https://0xYx.github.io/post/first-post/</link>
       <pubDate>Tue, 28 Sep 2021 12:36:50 +0800</pubDate>
       
-      <guid>https://0xYx.github.com/post/first-post/</guid>
+      <guid>https://0xYx.github.io/post/first-post/</guid>
       <description>前几个月因为项目的原因，想要看一下一个售卖3D手办的软件是怎么实现的，并且想看看有没有能力获取到里面的3D模型。拿到安装包之后，还是按照惯例直接砸壳调试分析了一下：
 结果启动之后，直接挂了。定位一下，有很明确的关于License的校验：
 打开他的lib文件看一下，从上图能看出，这个ImglyKit 跟PhotoEditorSDK 是依赖关系，因为ImglyKit开了校验，所以直接挂了。这里有意思的是他还提示你应该联系他的销售购买正版授权什么的。 老办法，用hoppers看一下加载的代码，找到加载入口，然后用logos把这一块加载的代码干掉再说：
