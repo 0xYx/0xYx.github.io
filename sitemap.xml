@@ -2,17 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://0xYx.github.iom/</loc>
+    <loc>https://0xYx.github.com/</loc>
     <lastmod>2021-09-28T12:36:50+08:00</lastmod>
   </url><url>
-    <loc>https://0xYx.github.iom/post/</loc>
+    <loc>https://0xYx.github.com/post/</loc>
     <lastmod>2021-09-28T12:36:50+08:00</lastmod>
   </url><url>
-    <loc>https://0xYx.github.iom/post/first-post/</loc>
+    <loc>https://0xYx.github.com/post/first-post/</loc>
     <lastmod>2021-09-28T12:36:50+08:00</lastmod>
   </url><url>
-    <loc>https://0xYx.github.iom/categories/</loc>
+    <loc>https://0xYx.github.com/categories/</loc>
   </url><url>
-    <loc>https://0xYx.github.iom/tags/</loc>
+    <loc>https://0xYx.github.com/tags/</loc>
   </url>
 </urlset>
