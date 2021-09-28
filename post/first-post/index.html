@@ -106,7 +106,7 @@
 <p>注意看上面红框里面的 <code>AssetBundle.loadFromMemory(decryptedBytes)</code> 函数，看来这个<code>decryptedBytes</code> 就是我们要寻找的目标了。再来看一下<code>dump.cs</code>文件：</p>
 <p><img src="/image/veve/9.png" alt="enter image description here"></p>
 <p>Bingo！找到了目标函数，他的地址在 <code>0x16E3FB8</code>，这下我们就可以去通过Frida开始着手去分析这个是否就是我们想要的目标了。</p>
-<pre tabindex="0"><code>john@JOHNSSONG-MB0 ~ % frida-trace -U veve -a &quot;UnityFramework\!0x16e3fb8&quot;
+<pre tabindex="0"><code>john-MB0 ~ % frida-trace -U veve -a &quot;UnityFramework\!0x16e3fb8&quot;
 
  **Instrumenting...**                                                         
 
