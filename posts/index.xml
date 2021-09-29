@@ -1,23 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>0xYx</title>
-    <link>https://0xYx.github.io/</link>
-    <description>Recent content on 0xYx</description>
+    <title>Posts on 0xYx</title>
+    <link>https://0xYx.github.io/posts/</link>
+    <description>Recent content in Posts on 0xYx</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© yingxinsong</copyright>
-    <lastBuildDate>Tue, 28 Sep 2021 12:36:50 +0800</lastBuildDate><atom:link href="https://0xYx.github.io/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>About</title>
-      <link>https://0xYx.github.io/about/</link>
-      <pubDate>Wed, 29 Sep 2021 14:46:26 +0800</pubDate>
-      
-      <guid>https://0xYx.github.io/about/</guid>
-      <description>Who？ 我是一名工程师，目前就职于某互联网公司，对iOS、音视频、逆向、游戏等技术都非常有兴趣。同时我也是一个钓鱼爱好者，平时喜欢跟朋友一起去钓鱼。
-Contact Me Email:me(At)yingxinsong.com</description>
-    </item>
-    
+    <lastBuildDate>Tue, 28 Sep 2021 12:36:50 +0800</lastBuildDate><atom:link href="https://0xYx.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>逆向Unity3D Asset Bundle</title>
       <link>https://0xYx.github.io/posts/unity3d-decrypt/</link>
