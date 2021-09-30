@@ -23,7 +23,7 @@
 结果启动之后，直接挂了。定位一下，有很明确的关于License的校验：
 打开他的lib文件看一下，从上图能看出，这个ImglyKit 跟PhotoEditorSDK 是依赖关系，因为ImglyKit开了校验，所以直接挂了。这里有意思的是他还提示你应该联系他的销售购买正版授权什么的。 老办法，用hoppers看一下加载的代码，找到加载入口，然后用logos把这一块加载的代码干掉再说：
 %hook RNPESDKImglyKit - (void)unlockWithLicense:(id)license { // 实际上是这个导致的，我们让他不要调用原来的方法 NSLog(@&#34;hook unlockWithLicense&#34;); %log; } %end 处理之后果然，这里可以看到bundleid 是不一样的："/>
-<script src="https://0xYx.github.io/js/feather.min.js"></script>
+<script src="https://0xYx.github.io//js/feather.min.js"></script>
 	
 	
         <link href="https://0xYx.github.io/css/fonts.b685ac6f654695232de7b82a9143a46f9e049c8e3af3a21d9737b01f4be211d1.css" rel="stylesheet">

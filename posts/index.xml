@@ -7,7 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© yingxinsong</copyright>
-    <lastBuildDate>Tue, 28 Sep 2021 12:36:50 +0800</lastBuildDate><atom:link href="https://0xYx.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 30 Sep 2021 17:22:36 +0800</lastBuildDate><atom:link href="https://0xYx.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>工程师自检手册</title>
+      <link>https://0xYx.github.io/posts/hiring/</link>
+      <pubDate>Thu, 30 Sep 2021 17:22:36 +0800</pubDate>
+      
+      <guid>https://0xYx.github.io/posts/hiring/</guid>
+      <description>在这个职场中，我觉得每一个单纯的工程师都应该有一个要做与不要做的手册，每次头脑发热做事情的时候，应该拿出来自检一下。下面，就是我从很多地方吸收的办公室真理，当然，后面也许还会收集更多：
+不要做 1. 闷头努力，从不汇报  吃力不讨好，功劳全部落入别人手里，出了问题，好吧，你来背锅
+ 2. 从不说不  这个也可以做，那个也可以做，工期越拉越长，bug 越积越多
+ 3. 框架没搭，就先优化  是人都会知道，一个work的版本，要比一个完美版更加重要。长点心吧，先跑通、再优化，相信我，这真是一个真理
+ 4. 抱怨一堆，代码没写  总有人觉得产品需求这不合理，那不合理。老板觉得合理，你觉得有问题，你算老几？</description>
+    </item>
+    
     <item>
       <title>逆向Unity3D Asset Bundle</title>
       <link>https://0xYx.github.io/posts/unity3d-decrypt/</link>
