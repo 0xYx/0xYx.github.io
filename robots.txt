@@ -1,3 +1,3 @@
 User-agent: *
 
-Sitemap: https://0xYx.github.io/sitemap.xml
+Sitemap: https://www.yingxinsong.com/sitemap.xml
