@@ -7,7 +7,27 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; Kapuseru - yingxinsong</copyright>
-    <lastBuildDate>Wed, 22 Dec 2021 16:19:08 +0800</lastBuildDate><atom:link href="https://www.yingxinsong.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 18 Mar 2022 16:39:41 +0800</lastBuildDate><atom:link href="https://www.yingxinsong.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CVPixelbuffer与Flutter外接纹理</title>
+      <link>https://www.yingxinsong.com/posts/cvpixelbuffer/</link>
+      <pubDate>Fri, 18 Mar 2022 16:39:41 +0800</pubDate>
+      
+      <guid>https://www.yingxinsong.com/posts/cvpixelbuffer/</guid>
+      <description>A Core Video pixel buffer is an image buffer that holds pixels in main memory. Applications generating frames, compressing or decompressing video, or using Core Image can all make use of Core Video pixel buffers.
+ 背景 最近遇到一个问题，如何把一个mp4格式的灰度视频后处理上色后再给到Flutter渲染？ 先来看一下整体的流程：
+  首先无论我们使用哪一种解码器，通常来说mp4格式的视频都会解码成YUV数据;
+  下一步就是要把解码后的视频帧提交给后处理模块，如果后处理模块可以接受YUV数据，则可以直接提交，我这边因为使用的后处理模块不支持YUV，所以要先把YUV转成BGRA；
+  下一步后处理模块就可以开始对视频做上色处理了，这里通常会提交GPU去渲染，对于iOS来说，目前比较常用的是用openGL渲染管线，或者是Metal；
+  经过后处理模块处理后，原视频帧会被上色，最终渲染到GPU的缓冲区，一般来说，对于Native类的应用，到目前就可以正常把处理后的视频渲染上屏了；
+  但是因为我们的目标是渲染到Flutter，所以还需要把上一步拿到的纹理从GPU读出来，交给Flutter，把纹理读到CPU，我们需要使用CVPixelBuffer缓存纹理数据；
+  Flutter侧接入外接纹理，有两个步骤：
+  在Flutter的渲染引擎光栅化之前，把我们准备好的数据提交给Flutter，这一步需要事先注册好纹理ID，这个纹理ID对应Flutter侧的TextureLayer；
+  在Flutter引擎对图层做光栅化之前，提交纹理数据，提交的纹理数据会提交给到Skia的Canvas，然后Flutter会通过统一的GraphicShell来提交渲染上屏
+  看完这个流程，如果是对这类应用熟悉一点的同学就已经可以发现两个优化点了，但是因为这并不在本文着重的范畴内，所以先给出解答
+  第二步如果直接使用YUV的数据做视频后处理可以减少一次图像处理与拷贝；</description>
+    </item>
+    
     <item>
       <title>2021年度总结</title>
       <link>https://www.yingxinsong.com/posts/what-i-learned-from-2021/</link>
