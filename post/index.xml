@@ -2,53 +2,53 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Kapuseru</title>
-    <link>http://localhost:1313/post/</link>
+    <link>https://www.yingxinsong.com/post/</link>
     <description>Recent content in Posts on Kapuseru</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 18 Mar 2022 16:39:41 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 18 Mar 2022 16:39:41 +0800</lastBuildDate><atom:link href="https://www.yingxinsong.com/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CVPixelbuffer与Flutter外接纹理</title>
-      <link>http://localhost:1313/post/cvpixelbuffer/</link>
+      <link>https://www.yingxinsong.com/post/cvpixelbuffer/</link>
       <pubDate>Fri, 18 Mar 2022 16:39:41 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/cvpixelbuffer/</guid>
+      <guid>https://www.yingxinsong.com/post/cvpixelbuffer/</guid>
       <description>A Core Video pixel buffer is an image buffer that holds pixels in main memory. Applications generating frames, compressing or decompressing video, or using Core Image can all make use of Core Video pixel buffers. 背景 最近遇到一个问题，如何把一个mp4格式的灰度视频后处理上色后再给到</description>
     </item>
     
     <item>
       <title>2021年度总结</title>
-      <link>http://localhost:1313/post/what-i-learned-from-2021/</link>
+      <link>https://www.yingxinsong.com/post/what-i-learned-from-2021/</link>
       <pubDate>Wed, 22 Dec 2021 16:19:08 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/what-i-learned-from-2021/</guid>
+      <guid>https://www.yingxinsong.com/post/what-i-learned-from-2021/</guid>
       <description>如何做年终总结 最近几年特别流行年度盘点，音乐类的App会总结你听了多少歌，银行类的App会总结你收入支出多少，最牛的是本地生活类的App，会</description>
     </item>
     
     <item>
       <title>直播中台搭建指南</title>
-      <link>http://localhost:1313/post/build_live_center/</link>
+      <link>https://www.yingxinsong.com/post/build_live_center/</link>
       <pubDate>Thu, 02 Dec 2021 17:22:23 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/build_live_center/</guid>
+      <guid>https://www.yingxinsong.com/post/build_live_center/</guid>
       <description>前言 自从头条搭上短视频这条快车道，做出了抖音这款风靡全世界的现象级产品。人们不禁都在想，他们到底用了什么技术？为什么头条能成功？其中不乏有神</description>
     </item>
     
     <item>
       <title>工程师自检手册</title>
-      <link>http://localhost:1313/post/hiring/</link>
+      <link>https://www.yingxinsong.com/post/hiring/</link>
       <pubDate>Thu, 30 Sep 2021 17:22:36 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/hiring/</guid>
+      <guid>https://www.yingxinsong.com/post/hiring/</guid>
       <description>在这个职场中，我觉得每一个单纯的工程师都应该有一个要做与不要做的手册，每次头脑发热做事情的时候，应该拿出来自检一下。下面，就是我从很多地方吸</description>
     </item>
     
     <item>
       <title>逆向Unity3D Asset Bundle</title>
-      <link>http://localhost:1313/post/unity3d-decrypt/</link>
+      <link>https://www.yingxinsong.com/post/unity3d-decrypt/</link>
       <pubDate>Tue, 28 Sep 2021 12:36:50 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/unity3d-decrypt/</guid>
+      <guid>https://www.yingxinsong.com/post/unity3d-decrypt/</guid>
       <description>前几个月因为项目的原因，想要看一下一个售卖3D手办的软件是怎么实现的，并且想看看有没有能力获取到里面的3D模型。拿到安装包之后，还是按照惯例</description>
     </item>
     
