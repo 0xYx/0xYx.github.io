@@ -7,7 +7,32 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; Kapuseru - yingxinsong</copyright>
-    <lastBuildDate>Fri, 18 Mar 2022 16:39:41 +0800</lastBuildDate><atom:link href="https://www.yingxinsong.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Nov 2022 16:38:55 +0800</lastBuildDate><atom:link href="https://www.yingxinsong.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>移动端支付链路优化指南</title>
+      <link>https://www.yingxinsong.com/posts/optimize_iap_purchase/</link>
+      <pubDate>Wed, 30 Nov 2022 16:38:55 +0800</pubDate>
+      
+      <guid>https://www.yingxinsong.com/posts/optimize_iap_purchase/</guid>
+      <description>序 ​	一个用户从你设计的产品能力、开发的功能流失的可能性有很多种，不过我相信你最不愿意的就是他在支付、购买的过程中流失。一方面，付费的用户往往粘性更高，停留时间更长，这对产品的指标是有帮助的；而另一方面，既然用户发起了支付，那么就说明他有购买的意愿，也证明了你的想法是成功的，可商业化的。但是现实往往并不那么让人满意，实际上在整个支付的链路上，有相当一部分的用户由于各种原因流失了，本文主要阐述QQ音乐是如何分析以及优化这些指标的。
+一、建立支付转化漏斗 ​	要降低支付链路上的折损，我们第一步首先要清楚折损的点是从哪里来的，采用转化漏斗是一种比较常见的方式。另一个方面，也需要考虑是要度量的流程从何开始，到什么时候结束。举例来说，产品同学通常计算支付转化率，是以下面这个公式来计算的：
+支付转化率 = 支付成功人数/营销页面曝光数 但，当整个支付转化漏斗还没有建立完整的时候，是不建议以页面曝光为支付转化流程中的起点的，原因是往往营销策略决定了用户支付的意愿，从而不同营销策略带来的支付转化率相差较大，研发同学是无从优化的。
+​	考虑到上面这个问题，可以采用下面这个公式：
+支付转化率 = 支付成功人次/发起支付的次数 这样的好处在于，发起支付到支付成功，衡量的是支付能力的成功率，发起支付等于用户已经有了购买意愿，所以这就与营销策略无关了。
+要建立这个漏斗，可以按照下面几个步骤来实施：
+  确定整个过程中涉及到的角色：以苹果支付举例，一次支付过程中涉及到用户、下单页、支付SDK、支付中台、发货后台、苹果后台这几个角色；
+  找出这几个角色之前的相互作用关系：
+支付作用关系图
+  根据相关关系中间的步骤建立支付转化漏斗。
+  下图是QQ音乐根据整个支付过程建立的转化漏斗：
+支付转化漏斗
+二、优化支付链路 启动应用 —— 预拉取苹果商品 ​	支付流程的第一步并不是下单，通常是初始化支付SDK，或者是跟苹果拉取商品信息。如果等到支付时再来做，用户可能需要等待更长的时间，在启动的时候就初始化支付SDK，可以更快的发起iAP支付。这背后的原因是苹果支付第一步是通过SKProductRequests 去请求商品列表，但是这个过程并不像一个Http请求这么简单，背后还有较为复杂以及不透明的步骤，此处援引公司内一位专门负责iAP的同学整理的信息，步骤如下：
+   根据 AppleID + AppID（由开发者证书 SeedID + 应用包名 BundleID 组成）+ ProductID 寻找内存缓存，若缓存为空，发起网络请求并建立内存缓存。
+  若命中缓存，判断缓存是否过期。
+  若缓存过期或没有命中缓存，则使用 AppID+ ProductID 进行物品查找。
+  如果有在 Xcode 编译运行时指定使用 StoreKit Configuration File，会尝试在指定的文件中查找物品，若文件中不包含该 ProductID 相关的信息，则会直接回调 InvalidProductID。</description>
+    </item>
+    
     <item>
       <title>CVPixelbuffer与Flutter外接纹理</title>
       <link>https://www.yingxinsong.com/posts/cvpixelbuffer/</link>

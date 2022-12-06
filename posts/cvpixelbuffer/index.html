@@ -104,10 +104,10 @@ if (!doNotTrack) {
 </blockquote>
 <h4 id="背景">背景</h4>
 <p>最近遇到一个问题，如何把一个<code>mp4</code>格式的灰度视频后处理上色后再给到Flutter渲染？
-<img src="/image/cvpixel/1.jpeg" alt="img1">
-<img src="/image/cvpixel/2.jpeg" alt="img2"></p>
+<img src="/image/cvpixel/01.jpeg" alt="img1">
+<img src="/image/cvpixel/02.jpeg" alt="img2"></p>
 <p>先来看一下整体的流程：</p>
-<p><img src="/image/cvpixel/7.png" alt="render"></p>
+<p><img src="/image/cvpixel/07.png" alt="render"></p>
 <ol>
 <li>
 <p>首先无论我们使用哪一种解码器，通常来说<code>mp4</code>格式的视频都会解码成YUV数据;</p>
@@ -134,7 +134,7 @@ if (!doNotTrack) {
 <p>在Flutter引擎对图层做光栅化之前，提交纹理数据，提交的纹理数据会提交给到Skia的Canvas，然后Flutter会通过统一的GraphicShell来提交渲染上屏</p>
 </li>
 </ol>
-<p><img src="/image/cvpixel/6.png" alt="render"></p>
+<p><img src="/image/cvpixel/06.png" alt="render"></p>
 <p>看完这个流程，如果是对这类应用熟悉一点的同学就已经可以发现两个优化点了，但是因为这并不在本文着重的范畴内，所以先给出解答</p>
 <ol>
 <li>
@@ -213,7 +213,7 @@ R <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.164</span>(
 </li>
 <li>
 <p><strong>CVPixelBufferCreate创建的纹理显示不正确，出现花屏</strong></p>
-<p><img src="/image/cvpixel/5.png" alt="5"></p>
+<p><img src="/image/cvpixel/05.png" alt="5"></p>
 <p>使用CVPixelBufferCreate创建的纹理，需要手动获取基地址，然后把图像数据拷贝进去。在这之前，我们先设置好pixelbuffer的属性：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c">NSDictionary <span style="color:#f92672">*</span>pixelBufferAttributes <span style="color:#f92672">=</span> <span style="color:#ae81ff">@{</span>
        (<span style="color:#66d9ef">__bridge</span> NSString <span style="color:#f92672">*</span>)kCVPixelBufferPixelFormatTypeKey: <span style="color:#ae81ff">@(</span>kCVPixelFormatType_32BGRA<span style="color:#ae81ff">)</span>, <span style="color:#75715e">// 设置为BGRA格式
@@ -259,7 +259,7 @@ CVPixelBufferCreate(kCFAllocatorDefault,
 </ol>
 <h5 id="三如何把metal渲染的纹理转为cvpixelbuffer">三、如何把Metal渲染的纹理转为CVPixelBuffer</h5>
 <p>Metal的目的之一，就是减少图形渲染管线在CPU的开销，并且能够在一次绘制指令提交尽可能多的任务。关于Metal的详细介绍可以查阅<a href="https://developer.apple.com/library/archive/documentation/Miscellaneous/Conceptual/MetalProgrammingGuide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40014221-CH1-SW1">官方文档</a>，此处并不赘述，下图给出Metal的渲染流水：</p>
-<p><img src="/image/cvpixel/3.png" alt="3"></p>
+<p><img src="/image/cvpixel/03.png" alt="3"></p>
 <p>由于我使用的后处理引擎是基于Metal实现的，所以这里就需要提取Metal纹理中的数据。通常来说，我们只需要把数据从GPU转移到CPU就可以了，此处可以考虑使用下面这个接口来做</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c"><span style="color:#75715e">/*!
 </span><span style="color:#75715e"> @method getBytes:bytesPerRow:fromRegion:mipmapLevel:
@@ -272,7 +272,7 @@ CVPixelBufferCreate(kCFAllocatorDefault,
 <li>设置 <code>allowGPUOptimizedContents</code>属性为<code> NO</code>，顾名思义，等于说为了CPU的访问友好，而舍弃GPU的性能。</li>
 </ol>
 <p>我使用了方案一之后，性能确实有所提升，但是数据却无法对其，始终有花屏，最后这个问题由于无法定位，舍弃了这个方案。</p>
-<p><img src="/image/cvpixel/4.png" alt="4"></p>
+<p><img src="/image/cvpixel/04.png" alt="4"></p>
 <h5 id="四使用-gpuimagerawdataoutput-做后处理">四、使用 GPUImageRawDataOutput 做后处理</h5>
 <p>思考一下，我们的目标是给灰度视频上色，支持自定义滤镜的GPUIMage也是一个选择。在花了比较多时间都无法解决上面的问题后，我尝试重新实现了一下这个滤镜，glsl的代码不难，这里不给出实现了。我们的重点在于拿出GPUImage渲染的纹理数据提交给Flutter渲染。在这里我们使用GPUImageRawDataOutput来实现：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-objective-c" data-lang="objective-c"><span style="color:#75715e">// 传入原始的BGRA数据
@@ -322,6 +322,8 @@ filter.whiteColor <span style="color:#f92672">=</span> (GPUVector3){<span style=
     <nav class="p-pagination c-pagination">
       <div class="c-pagination__ctrl">
         <div class="c-pagination__newer">
+          
+          <a href="https://www.yingxinsong.com/posts/optimize_iap_purchase/">Newer</a>
           
         </div>
         <div class="c-pagination__older">
@@ -434,6 +436,25 @@ filter.whiteColor <span style="color:#f92672">=</span> (GPUVector3){<span style=
     </p>
   </footer>
 
+  // mermaid loader by ttys3.dev
+  const loadMermaidOnNeed = () => {
+    if (document.querySelectorAll('.mermaid').length > 0) {
+      loadScript('https://cdn.jsdelivr.net/npm/mermaid@9.2.2/dist/mermaid.min.js', () => {
+        document.head.insertAdjacentHTML("beforeend", `<style>.mermaid svg { background-color: #dadcd8 !important; }</style>`);
+        // default, dark, neutral, forest
+        mermaid.initialize({ startOnLoad: false, securityLevel: "strict", theme: "neutral" });
+        // https://github.com/mermaid-js/mermaid/blob/e6e94ad57ea06ef8627bf91ddfbd88f5082952bf/src/mermaid.js#L153
+        // mermaid.contentLoaded();
+        mermaid.init();
+        console.log("mermaid init done");
+      })
+    }
+  }
+
+  window.addEventListener('load', function(event) {
+    // load mermaid
+    loadMermaidOnNeed();
+  });
 </body>
 </html>
 
