@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>逆向Unity3D Asset Bundle - Kapuseru</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="yingxinsong" /><meta name="description" content="前几个月因为项目的原因，想要看一下一个售卖3D手办的软件是怎么实现的，并且想看看有没有能力获取到里面的3D模型。拿到安装包之后，还是按照惯例" /><meta name="keywords" content="Fishing, Tech, Life" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/unity3d-decrypt/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b874a8796a492f0d7c86bb24c33cbf052935783a5778ebaf819a8e514bf49f10.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="逆向Unity3D Asset Bundle" />
+<meta property="og:description" content="前几个月因为项目的原因，想要看一下一个售卖3D手办的软件是怎么实现的，并且想看看有没有能力获取到里面的3D模型。拿到安装包之后，还是按照惯例" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/unity3d-decrypt/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-09-28T12:36:50+08:00" />
+<meta property="article:modified_time" content="2021-09-28T12:36:50+08:00" />
+
+<meta itemprop="name" content="逆向Unity3D Asset Bundle">
+<meta itemprop="description" content="前几个月因为项目的原因，想要看一下一个售卖3D手办的软件是怎么实现的，并且想看看有没有能力获取到里面的3D模型。拿到安装包之后，还是按照惯例"><meta itemprop="datePublished" content="2021-09-28T12:36:50+08:00" />
+<meta itemprop="dateModified" content="2021-09-28T12:36:50+08:00" />
+<meta itemprop="wordCount" content="2164">
+<meta itemprop="keywords" content="逆向," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="逆向Unity3D Asset Bundle"/>
+<meta name="twitter:description" content="前几个月因为项目的原因，想要看一下一个售卖3D手办的软件是怎么实现的，并且想看看有没有能力获取到里面的3D模型。拿到安装包之后，还是按照惯例"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Kapuseru</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Kapuseru</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">逆向Unity3D Asset Bundle</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-09-28 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>前几个月因为项目的原因，想要看一下一个售卖3D手办的软件是怎么实现的，并且想看看有没有能力获取到里面的3D模型。拿到安装包之后，还是按照惯例直接砸壳调试分析了一下：</p>
+<p><img src="/image/veve/1.png" alt="enter image description here"></p>
+<p>结果启动之后，直接挂了。定位一下，有很明确的关于License的校验：</p>
+<p><img src="/image/veve/2.png" alt="enter image description here"></p>
+<p>打开他的lib文件看一下，从上图能看出，这个ImglyKit 跟PhotoEditorSDK 是依赖关系，因为ImglyKit开了校验，所以直接挂了。这里有意思的是他还提示你应该联系他的销售购买正版授权什么的。
+老办法，用hoppers看一下加载的代码，找到加载入口，然后用logos把这一块加载的代码干掉再说：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">%hook RNPESDKImglyKit
+- (void)unlockWithLicense:(id)license
+{
+// 实际上是这个导致的，我们让他不要调用原来的方法
+    NSLog(@&#34;hook unlockWithLicense&#34;);
+    %log;
+}
+%end
+</code></pre></td></tr></table>
+</div>
+</div><p>处理之后果然，这里可以看到bundleid 是不一样的：</p>
+<p><img src="/image/veve/3.png" alt="enter image description here"></p>
+<p>下一步又受阻了，检测到越狱，不给调试：</p>
+<p><img src="/image/veve/4.png" alt="enter image description here"></p>
+<p>这还不是一个简单的遮罩，看起来是检查到越狱直接不给调试了。大胆猜测一下，不会有一个函数叫jailBroken吧：</p>
+<p><img src="/image/veve/5.png" alt="enter image description here"></p>
+<p>真的有，那么把他也干掉：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">%hook JailMonkey
+
+- (BOOL)isJailBroken
+{
+    NSLog(@&#34;hook isJailBroken&#34;);
+    %log;
+    return NO;
+}
+%end
+</code></pre></td></tr></table>
+</div>
+</div><p>搞定，接下来就是分析他的渲染以及使用的模型：</p>
+<blockquote>
+<p><strong>2021-06-17 16:58:49.674491+0800 Veve[2816:236864] -[&lt;RNUnityView: 0x10fd2b9e0&gt; setUnityView:&lt;UnityView: 0x11d5ce960; frame = (0 0; 375 812); autoresize = W+H; layer = &lt;CAMetalLayer: 0x283c3be60&raquo;]</strong></p>
+</blockquote>
+<p>分析发现他渲染是用的Unity,底层是CAMetalLayer，但是这些都不重要，我的目标是搞到他渲染的模型。一期到这里的时候就卡住了，原因是我没有办法找到这个unity渲染的入口函数，只能知道他是用什么做渲染的显然是不够的。为了解决这个问题，我们可以从UnityFramework这个库着手分析看看。继续用hoppers逆向分析一下这个库看一下：</p>
+<p><img src="/image/veve/6.png" alt="enter image description here"></p>
+<p>可以看出他并没有很顺利的拿到符号，反而分析出了一堆 sub_hex 的地址一样的函数名。如果符号也没有，那下一步应该怎么走呢？这个时候我的思路还是想回到原理，看一下unity是怎么打包的。所以接下来介绍三个概念：</p>
+<ol>
+<li>iL &ndash; 中间代码，各种语言都可以编译成中间代码，然后再根据平台特性转化为最终代码</li>
+<li>mono虚拟机 &ndash; 包含把C# 代码转化为iL 中间代码的工具，跨平台的运行.Net环境，支持JIT</li>
+<li>il2cpp &ndash; 把C#代码转化为cpp代码，只支持AoT</li>
+</ol>
+<p>想详细了解可以看这篇文章：<a href="https://zhuanlan.zhihu.com/p/352463394">Mono和IL2CPP的区别</a> 以及还有两个概念JIT跟AOT我推荐看这篇文章，说的非常好：<a href="https://www.cnblogs.com/murongxiaopifu/p/4278947.html">谁偷了我的热更新？Mono，JIT，iOS</a></p>
+<p>众所周知，unity的游戏使用C#写的，并不是cpp。但是unity之所以能实现跨平台，就是基于mono 跟 il2cpp 这两个工具。自从16年之后，il2cpp因为性能更好已经逐渐被大家采用，但是与此同时，il2cpp本身也有一定的性能安全问题，这也就让想要做逆向分析的人有了机会。</p>
+<p>我们想要dump出UnityAsset, 那么可以怎么办呢。下面再介绍两个工具：</p>
+<ol>
+<li><a href="https://frida.re/">Frida</a>  &ndash; 一款很好用的远程调试工具</li>
+<li><a href="https://github.com/Perfare/Il2CppDumper">Il2cppDumper</a>  &ndash; 帮助我们把il2cpp转好的cpp符号再还原回来</li>
+</ol>
+<p>这里C#转好的cpp函数在<code>UnityFramework.framework</code>这个静态库下，我们对他做一下il2cppdump看看：</p>
+<p><img src="/image/veve/7.png" alt="enter image description here"></p>
+<p>可以看到dump出来的文件包含一个<code>dump.cs</code> 以及 <code>DummyDll</code>文件夹，<code>dump.cs</code> 我们可以用VSCode打开，里面包含了原C#函数符号以及对应的地址。也可以通过ida打开 <code>Assembly-Csharp.i64</code>这个文件，同样也是逆向好的符号。
+虽然这样就拿到了源符号，但是这就像茫茫大海，应该从哪里入手？所以我们首先分析一下Unity加载资源的方法，Unity 是使用AssetBundle加载资源的，我首先去找了一下Unity的官方API，官网给出了一个加密Asset的方案：</p>
+<p><img src="/image/veve/8.png" alt="enter image description here"></p>
+<p>注意看上面红框里面的 <code>AssetBundle.loadFromMemory(decryptedBytes)</code> 函数，看来这个<code>decryptedBytes</code> 就是我们要寻找的目标了。再来看一下<code>dump.cs</code>文件：</p>
+<p><img src="/image/veve/9.png" alt="enter image description here"></p>
+<p>Bingo！找到了目标函数，他的地址在 <code>0x16E3FB8</code>，这下我们就可以去通过Frida开始着手去分析这个是否就是我们想要的目标了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">john-MB0 ~ % frida-trace -U veve -a &#34;UnityFramework\!0x16e3fb8&#34;
+
+ **Instrumenting...**                                                         
+
+// Frida 帮你生成了一个handler js
+sub_16e3fb8: Loaded handler at &#34;/Users/john/__handlers__/UnityFramework/sub_16e3fb8.js&#34;
+
+ **Started tracing 1 function. Press Ctrl+C to stop.**
+</code></pre></td></tr></table>
+</div>
+</div><p>通过<code>frida-trace -a</code> 可以追踪第三方库+对应偏移地址的函数，这个时候frida会自动生成一个jshandler, 我们可以通过这个这个文件去使用js注入我们的代码，这里我们想看一下这个decrypt函数是否是我们的目标，可以在 <code>onEnter()</code>插入我们的dump代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">onEnter(log, args, state) {
+    log(&#39;sub_16e3fb8()&#39;);
+    log(&#34;[-] hook invoked&#34;);
+    log(JSON.stringify({
+                        a0: args[0],
+                    }, null, &#39;\t&#39;));
+    var dump = Memory.readByteArray(args[0], 0x100);
+    log(&#34;result:&#34; + hexdump(dump));
+  },
+</code></pre></td></tr></table>
+</div>
+</div><p>再看一下输出的结果：</p>
+<p><img src="/image/veve/10.png" alt="enter image description here"></p>
+<p>看来我们找对了方向，现在还剩下最后两个问题：</p>
+<h4 id="1-获取文件长度">1. 获取文件长度</h4>
+<p>跟有经验的同学请教，发现文件长度就在这几个字节，这是应该是这个格式的一种规范：</p>
+<p><img src="/image/veve/11.png" alt="enter image description here"></p>
+<h4 id="2-dump文件">2. dump文件</h4>
+<p>这里我尝试了两种办法，第一种通过Frida创建dump文件，然后再使用爱思助手把文件拿出来。但是因为文件权限的问题一直写入失败。因为iOS机器已经越狱，并且使用了MonkeyDev ，所以我的另一个思路就是直接通过LLDB来把这个文件拿出来。
+使用LLDB的思路就是通过设置一个断点，在<code>loadFromMemory(decryptedBytes)</code>函数执行的时候，把x0地址对应的内存转换为NSData dump出来。
+首先打一个符号端点：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(lldb) br s -a 0x107BC3FB8
+Breakpoint 2: where = UnityFramework`___lldb_unnamed_symbol122084$$UnityFramework, address = 0x0000000107bc3fb8
+</code></pre></td></tr></table>
+</div>
+</div><p>然后dump对应的文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">po [[NSData dataWithBytes:(id)0x0000000139a25000 length:0x43563a] writeToFile:@&#34;/var/mobile/Containers/Data/Application/5520D425-CA51-47FB-AF93-172E1C2258CB/Documents/veve.ab&#34; atomically:YES]
+</code></pre></td></tr></table>
+</div>
+</div><p>到此我就拿到了<code>veve.ab</code>这个Unity文件，成功。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">yingxinsong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-09-28
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E9%80%86%E5%90%91/">逆向</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/hiring/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">工程师自检手册</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'yingxinsong';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:me@yingxinsong.com" class="iconfont icon-email" title="email"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+ 
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>yingxinsong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script><script></script><script src="https://cdn.jsdelivr.net/npm/raphael@2.2.7/raphael.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script> <script src="https://cdn.jsdelivr.net/npm/flowchart.js@1.8.0/release/flowchart.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script><script src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script> <script src="https://cdn.jsdelivr.net/npm/snapsvg@0.5.1/dist/snap.svg-min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script> <script src="https://cdn.jsdelivr.net/npm/underscore@1.8.3/underscore-min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script> <script src="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-GC5VY37CS4', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

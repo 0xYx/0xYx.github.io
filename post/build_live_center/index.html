@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>直播中台搭建指南 - Kapuseru</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="yingxinsong" /><meta name="description" content="前言 自从头条搭上短视频这条快车道，做出了抖音这款风靡全世界的现象级产品。人们不禁都在想，他们到底用了什么技术？为什么头条能成功？其中不乏有神" /><meta name="keywords" content="Fishing, Tech, Life" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/build_live_center/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b874a8796a492f0d7c86bb24c33cbf052935783a5778ebaf819a8e514bf49f10.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="直播中台搭建指南" />
+<meta property="og:description" content="前言 自从头条搭上短视频这条快车道，做出了抖音这款风靡全世界的现象级产品。人们不禁都在想，他们到底用了什么技术？为什么头条能成功？其中不乏有神" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/build_live_center/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-02T17:22:23+08:00" />
+<meta property="article:modified_time" content="2021-12-02T17:22:23+08:00" />
+
+<meta itemprop="name" content="直播中台搭建指南">
+<meta itemprop="description" content="前言 自从头条搭上短视频这条快车道，做出了抖音这款风靡全世界的现象级产品。人们不禁都在想，他们到底用了什么技术？为什么头条能成功？其中不乏有神"><meta itemprop="datePublished" content="2021-12-02T17:22:23+08:00" />
+<meta itemprop="dateModified" content="2021-12-02T17:22:23+08:00" />
+<meta itemprop="wordCount" content="4211">
+<meta itemprop="keywords" content="音视频,直播," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="直播中台搭建指南"/>
+<meta name="twitter:description" content="前言 自从头条搭上短视频这条快车道，做出了抖音这款风靡全世界的现象级产品。人们不禁都在想，他们到底用了什么技术？为什么头条能成功？其中不乏有神"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Kapuseru</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Kapuseru</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">直播中台搭建指南</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-12-02 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#前言">前言</a></li>
+            <li><a href="#什么是中台">什么是中台</a></li>
+            <li><a href="#搭建直播中台">搭建直播中台</a></li>
+            <li><a href="#直播中台实践----基础架构">直播中台实践 &ndash; 基础架构</a></li>
+            <li><a href="#直播中台实践----通信机制与生命周期">直播中台实践 &ndash; 通信机制与生命周期</a></li>
+            <li><a href="#直播中台实践----收益">直播中台实践 &ndash; 收益</a></li>
+            <li><a href="#回顾一----我的反思与我学到了什么">回顾一 &ndash; 我的反思与我学到了什么？</a></li>
+            <li><a href="#最后">最后</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h3 id="前言">前言</h3>
+<p>自从头条搭上短视频这条快车道，做出了抖音这款风靡全世界的现象级产品。人们不禁都在想，他们到底用了什么技术？为什么头条能成功？其中不乏有神化创始人的，也有真的去探究背后的技术的。我身为所谓”竞争对手“公司的一份子，也不免常常被安利。其中听得最多的就是&quot;中台&quot;二字。</p>
+<h3 id="什么是中台">什么是中台</h3>
+<p>如果让我来回答这个问题，我觉得其实根本没有什么中台。所谓的中台概念，也只是软件开发过程中为了提速软件开发效率的产物之一，组件化，微服务等等概念，其目的都是为了减少软件开发过程中的重复劳动，降低试错成本。笔者大概在2013年的时候，就有接触过一篇很有意思的文章:<a href="https://gist.github.com/chitchcock/1281611">Stevey&rsquo;s Google Platforms Rant</a>。作者喷了一大堆亚马逊的抉择是如何如何差，Google是如何如何好。到最后却反过来讲了亚马逊的平台做的如何好，以及杰夫贝佐斯竟然可以在软件领域也有先知卓见，搭建了亚马逊的平台。里面也有一些对微软，苹果的评价，相当有趣。</p>
+<h3 id="搭建直播中台">搭建直播中台</h3>
+<p>虽然我并不认同这个概念，不过大概从19年底开始，部门内部的研发就开始出现各种搭建中台的声音，到现在也是不绝于耳。无论是什么业务，不管能不能真正的复用，先命名为XX中台，占个坑位。彼时我刚好转型独立负责一个产品的客户端开发，所以我也不能免俗，决定从负责的直播业务着手，搭建一款直播中台。
+直播中台的目标，主要有两个：</p>
+<ol>
+<li>吃自己的狗粮</li>
+<li>支撑多个产品线
+下面我从将从我的实践与我的反思两个方面来总结这部分的工作。</li>
+</ol>
+<h3 id="直播中台实践----基础架构">直播中台实践 &ndash; 基础架构</h3>
+<p>首先放出整体的架构图：</p>
+<p><img src="/image/livecenter/1.png" alt="直播中台架构"></p>
+<p>为了整体的业务尽可能的达到可复用性，首先我将整体的业务划分为五层，每一层组件与上层组件之间呈现单项依赖关系，这样做的好处就是可以做到最大程度的解耦。</p>
+<h4 id="基础服务层">基础服务层</h4>
+<p>基础服务层分为两部分，与直播能力有关的如推拉流的SDK，美颜，伴奏处理等能力，可以抽象成跨平台的中间件，这部分的能力虽然与业务无关，但是最好还是在这上面封装一层抽象层。方便后续替换SDK。另外，在处理SDK的数据层面上，也最好使用原始数据。更理想一点，可以搭建一套自己的渲染流程。
+这里需要注意的点，主要是需要处理好原始数据的兼容性。比如yuv数据在安卓机器上会存在按16位对其的问题。在对耳返的处理上，安卓也需要处理好硬件耳返与软件耳返的能力等。这些能力通常来说并不属于推拉流SDK，或者是美颜相关的业务。但是却可以做成基础能力。</p>
+<h4 id="业务服务层">业务服务层</h4>
+<p>业务服务层，是对直播间状态机的抽象。粗略划分有下面几类：</p>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>服务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基础服务</td>
+<td>进房流程、心跳、推拉流、美颜、IM信令、最小化、生命周期</td>
+</tr>
+<tr>
+<td>基础业务服务</td>
+<td>连麦、PK、清晰度切换 等基础玩法</td>
+</tr>
+<tr>
+<td>扩展业务服务</td>
+<td>红包、官方房间 等业务玩法</td>
+</tr>
+</tbody>
+</table>
+<p>直播业务的特点在于，相比于传统页面的CURD，直播业务的玩法往往有相当多的状态同步。业务服务层仅包含与业务后台状态同步相关的实现，记录业务状态的数据。原则上来说，这一层非常考验研发同学的抽象能力。举例来说，一个连麦业务与后台交互的状态可能有以下这些：</p>
+<p>连麦状态</p>
+<ul>
+<li>未连麦</li>
+<li>等待队列中</li>
+<li>正在麦上，状态正常</li>
+<li>已同意上麦</li>
+<li>静音</li>
+</ul>
+<p>对于后台业务来说，这几个状态位就已经足够了，因为后台只处理纯数据的轮转。一种办法就是我们如实的去实现这五个接口，依赖于使用组件的同学来消化五个接口的意义，由于前端的业务往往与UI交互相关，那么这部分的工作就不可避免的与UI代码互相耦合了。业务服务层的意义，就是要消化这部分的状态轮转，并提供可读性好的接口。上面的五个状态，可以根据业务需求转化出用户的操作，与后台的响应两部分接口。在协议上可以分为：</p>
+<pre><code>Action:
+// 用户
+requestConnect();
+cancelConnect();
+stopConnect();
+
+//主播
+acceptConncetRequest();
+refuseConncetRequest();
+muteUser();
+kickoutUser();
+
+Listener:
+// 处理状态同步与一些异常事件
+onUserConnectStatusUpdate(Status status);
+onConncetTimeOut();
+...
+</code></pre>
+<p>这样的抽象的好处有很多，如从纯状态的流程变为业务流程，业务可读性更好。统一管理了相关状态，可以有效避免状态同步到多个内存导致UI界面混乱的问题等。</p>
+<h4 id="ui组件层">UI组件层</h4>
+<p>UI组件采用MVVM中的 ViewModel 与 View 的思想。其中View作为纯粹的UI组件，只处理UI元素的布局。而实际的业务逻辑代码，则是交给ViewModel来实现。需要注意的是，ViewModel将直接使用业务服务层的数据，并把状态同步后的数据同步给View展示。起到了承上启下的作用。为了实现到纯粹的UI组件，ViewModel跟View之间的数据更新可以采用反射的方式来实现。比如iOS中可以使用ReactCocoa, 而安卓则可以使用 DataBinding 等技术。这一层要求整个数据的流动必须是单向流动的，并且都由业务服务层提供的接口来驱动
+如下图：</p>
+<p><img src="/image/livecenter/4.png" alt="数据流动"></p>
+<p>这样做有两点收益：</p>
+<ol>
+<li>纯UI的View因为不含任何业务逻辑，所以具备最大的可复用性，方便拆卸。</li>
+<li>可以针对相同UI实现不同的ViewModel来实现不同的业务逻辑，这样做的好处在于当有不同的房间类型的时候，方便替换数据源。</li>
+</ol>
+<h4 id="业务装配层">业务装配层</h4>
+<p>现在我们有了业务逻辑，有了UI，那么就可以针对不同的业务场景把直播房间搭建起来了。一种方式是你可以写重复的代码，但这显而易见不够灵活。另一个办法则是再实现一套业务装配层。这一层包含两个功能。一个是负责把UI组件层的 ViewModel 与业务服务层的服务接口事件绑定起来，另一个则是根据业务需求来做UI上的排版布局。</p>
+<p><img src="/image/livecenter/5.png" alt="业务装配"></p>
+<p>采用这种方式，不同的业务就可以按需加载自己的业务模块，实现到搭积木的效果了。但是实际上却不仅于此，如果我们考虑把业务模块与布局抽象成一个布局文件，类似于前端排版的css，那么我们甚至可以动态下发不同的直播间了。这个设想我们仅实现到搭建积木这一层，动态下发的能力因为后续我没有继续负责直播业务而没有继续推进。</p>
+<h4 id="房间玩法">房间玩法</h4>
+<p>通过不同的业务逻辑搭建的不同直播间，其实也具备一定的可复用性。不过这部分其实不属于直播中台组件搭建的能力了，复用的是整个产品与视觉的设计。在某一些业务的场景也可以用到，比如手机QQ空间分为独立的App与手机QQ的结合版。那么如果这里功能完全一样，其实是可以同步的更新的。</p>
+<h3 id="直播中台实践----通信机制与生命周期">直播中台实践 &ndash; 通信机制与生命周期</h3>
+<h4 id="通信机制">通信机制</h4>
+<p>对业务做好分层隔离之后，下一个需要解决的是模块之间的协同问题。设想在业务服务层有模块A，想要与业务模块B通信。一种方式是通过上图的数据流动的方式，数据先向上流动，然后再由具体的业务ViewModel来消化。这样虽然可以解决业务模块之间纯粹的隔离，但是如果是IM模块，或者是进房事件这种关键模块，则不适用这种场景。因此可以设计一种事件总线的机制来做分发：</p>
+<p><img src="/image/livecenter/3.png" alt="事件总线"></p>
+<p>这样做的好处有下面几个：</p>
+<ol>
+<li>每一个模块可以根据总线事件，自行选择加载或者不加载</li>
+<li>模块之间互相没有依赖，在进房时可以并行加载，提前展示</li>
+<li>增强代码可读性，统一认识</li>
+</ol>
+<p>但是这个机制其实也存在一定的缺陷，比如在进房成功的场景，如果所有的模块都同时做CPU集中型任务的话，那不可避免的会造成拥塞。所以理想来说还需要事件总线的派发器能够做好调度。
+另一种场景是模块A跟模块B之间有强依赖，比如直播PK玩法的场景，就需要先让两个主播连麦，之后再进行PK。这个时候一般来说有两个办法：
+一个是可以让连麦模块作为纯粹的模块，PK模块作为连麦的子模块，这样从逻辑上也合理，同时PK模块对外实现的接口也掩蔽了连麦模块，接口更清晰。
+另一种则是通过某种路由协议来通信，由连麦模块跟PK模块之间做协议上的沟通。不过这样也带来了接口的复杂性，以及管理接口相关的问题。
+所以在这种场景下，我们最终选择的是第一种方法。</p>
+<h4 id="生命周期">生命周期</h4>
+<p>生命周期也是直播间需要考虑的问题之一，例如在用户上下滑动直播间时，我们需要对部分的UI组件或者模块做复用，来减少内存损耗，提升加载速度。这样就必须要避免重用的组件复用了上一次的状态。所以最好通过统一的生命周期事件做好处理：</p>
+<p><img src="/image/livecenter/2.png" alt="生命周期"></p>
+<p>把所有模块统一加载，统一销毁。</p>
+<h3 id="直播中台实践----收益">直播中台实践 &ndash; 收益</h3>
+<p>很难说以上架构就是完美的架构，不过最终这一套架构满足了公司音视频直播的业务场景，支持了接近30个研发无障碍协同，快速迭代，接入到了公司多个前端App上。在房间模式上，通过上述架构我们快速支持了产品提出的不同直播间玩法，比如在疫情来到的2020年Club House模式爆火的时候，我们可以迅速通过这个架构搭建出一套UI完全不一样的直播间，在这一点上我还是比较满意的。于此同时，由于模块之间隔离做的不错，所以我跟团队的小伙伴们也积极探索了一些周边的优化，比如编译优化，单元测试，UI组件库，跨平台等等。</p>
+<h3 id="回顾一----我的反思与我学到了什么">回顾一 &ndash; 我的反思与我学到了什么？</h3>
+<h5 id="胆大心细">胆大心细</h5>
+<p>整个直播中台的搭建耗时接近一年，由于前期业务着急上线，每次大的重构都好像在给赛道上飞速跑的F1方程式赛车换轮胎一样，必须要胆大心细。但是我认为作为技术管理者，必须要有这样魄力，敢于改造，最后会发现整体的项目ROI是很高的。</p>
+<h5 id="改造人的认知是很困难的">改造人的认知是很困难的</h5>
+<p>统一的架构需要统一的实现方式，但是同样带来的问题确一定程度上束缚了开发人员的自主性。可以说在这个地方我像是一个代码暴君，推翻了一切不不符合中台架构的实现。在最开始组内的同学对这一套架构不够了解的时候，发动了一次次的站立会议，等于说强行统一认知，就算这样，整套架构中仍有部分代码不符合规范。所以，整个中台架构的推动可以说是非常艰难。
+但是反过来说，如果没有一个这样暴君的角色，那么对应的执行者一定会执行不到位。经过这一件事，我经常在想，架构师到底是一个什么样的角色呢？</p>
+<h5 id="选育用留">选育用留</h5>
+<p>曾经我有过一个疑惑，每次我把一个我认为技术不错的候选人转给我当时的总监，他总要问：&ldquo;这个人聪明不聪明？&quot;。作为工程师来说，一个人聪明不聪明重要呢？还是懂各种技术知识更重要呢？从前的我一直都认为，后者更重要。
+但是经过这个项目，我再回过头来看，我会认为一个人聪明，情商高，技术一般，远比精通各种技术，但是情商低，理解事情困难的人更好。这个事情并不是非常绝对的，但是在现代工程的领域，往往更加注重协作，而较少真正存在技术深度的研发工作。选择前者能够让项目推进的更顺利，事半功倍。
+为什么得出这个结论呢？套用2021年底还流行的一句话 —— &ldquo;不要问我是怎么知道的。&rdquo;</p>
+<h5 id="身体是革命的本钱">身体是革命的本钱</h5>
+<p>回想过去两年，可以说是各种身体状况频发，也许是因为年到三十，人到中年。也许是因为项目发展太快，步子太大扯到蛋了。不管怎么说，有一个好身体才能有本钱做更多的事情，实现更多在技术上的想法。</p>
+<h3 id="最后">最后</h3>
+<p>这篇总结是我一直想写，但是总是因为某一些原因而没有写。搭建直播中台已经是大半年前的事情了，而今年年中因为部门调动，目前我已经不再负责这一块的业务，开始了新的征程。今天把这一段经历记录下来，结项，迈向新的开始。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">yingxinsong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-12-02
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频</a>
+          <a href="/tags/%E7%9B%B4%E6%92%AD/">直播</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/what-i-learned-from-2021/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">2021年度总结</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/hiring/">
+            <span class="next-text nav-default">工程师自检手册</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'yingxinsong';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:me@yingxinsong.com" class="iconfont icon-email" title="email"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+ 
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>yingxinsong</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script><script></script><script src="https://cdn.jsdelivr.net/npm/raphael@2.2.7/raphael.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script> <script src="https://cdn.jsdelivr.net/npm/flowchart.js@1.8.0/release/flowchart.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script><script src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script> <script src="https://cdn.jsdelivr.net/npm/snapsvg@0.5.1/dist/snap.svg-min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script> <script src="https://cdn.jsdelivr.net/npm/underscore@1.8.3/underscore-min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script> <script src="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-GC5VY37CS4', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
