@@ -6,7 +6,16 @@
     <description>Recent content on Kapuseru</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 18 Mar 2022 16:39:41 +0800</lastBuildDate><atom:link href="https://www.yingxinsong.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Nov 2022 16:38:55 +0800</lastBuildDate><atom:link href="https://www.yingxinsong.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>移动端支付链路优化指南</title>
+      <link>https://www.yingxinsong.com/post/optimize_iap_purchase/</link>
+      <pubDate>Wed, 30 Nov 2022 16:38:55 +0800</pubDate>
+      
+      <guid>https://www.yingxinsong.com/post/optimize_iap_purchase/</guid>
+      <description>TL;DR 序 ​ 一个用户流失的可能性有很多种，不过我相信你最不愿意的就是他在支付、购买的过程中流失。一方面，付费的用户往往粘性更高，停留时间更长，这对</description>
+    </item>
+    
     <item>
       <title>CVPixelbuffer与Flutter外接纹理</title>
       <link>https://www.yingxinsong.com/post/cvpixelbuffer/</link>
