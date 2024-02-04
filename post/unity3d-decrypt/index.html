@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.92.2 with theme even" />
+<meta name="generator" content="Hugo 0.120.4 with theme even" />
 
 
 <link rel="canonical" href="https://www.yingxinsong.com/post/unity3d-decrypt/" />
@@ -171,15 +171,15 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">%hook RNPESDKImglyKit
-- (void)unlockWithLicense:(id)license
-{
-// 实际上是这个导致的，我们让他不要调用原来的方法
-    NSLog(@&#34;hook unlockWithLicense&#34;);
-    %log;
-}
-%end
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">%hook RNPESDKImglyKit
+</span></span><span class="line"><span class="cl">- (void)unlockWithLicense:(id)license
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">// 实际上是这个导致的，我们让他不要调用原来的方法
+</span></span><span class="line"><span class="cl">    NSLog(@&#34;hook unlockWithLicense&#34;);
+</span></span><span class="line"><span class="cl">    %log;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">%end
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>处理之后果然，这里可以看到bundleid 是不一样的：</p>
 <p><img src="/image/veve/3.png" alt="enter image description here"></p>
@@ -201,16 +201,16 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">%hook JailMonkey
-
-- (BOOL)isJailBroken
-{
-    NSLog(@&#34;hook isJailBroken&#34;);
-    %log;
-    return NO;
-}
-%end
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">%hook JailMonkey
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">- (BOOL)isJailBroken
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    NSLog(@&#34;hook isJailBroken&#34;);
+</span></span><span class="line"><span class="cl">    %log;
+</span></span><span class="line"><span class="cl">    return NO;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">%end
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>搞定，接下来就是分析他的渲染以及使用的模型：</p>
 <blockquote>
@@ -251,15 +251,15 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">john-MB0 ~ % frida-trace -U veve -a &#34;UnityFramework\!0x16e3fb8&#34;
-
- **Instrumenting...**                                                         
-
-// Frida 帮你生成了一个handler js
-sub_16e3fb8: Loaded handler at &#34;/Users/john/__handlers__/UnityFramework/sub_16e3fb8.js&#34;
-
- **Started tracing 1 function. Press Ctrl+C to stop.**
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">john-MB0 ~ % frida-trace -U veve -a &#34;UnityFramework\!0x16e3fb8&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> **Instrumenting...**                                                         
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// Frida 帮你生成了一个handler js
+</span></span><span class="line"><span class="cl">sub_16e3fb8: Loaded handler at &#34;/Users/john/__handlers__/UnityFramework/sub_16e3fb8.js&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> **Started tracing 1 function. Press Ctrl+C to stop.**
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>通过<code>frida-trace -a</code> 可以追踪第三方库+对应偏移地址的函数，这个时候frida会自动生成一个jshandler, 我们可以通过这个这个文件去使用js注入我们的代码，这里我们想看一下这个decrypt函数是否是我们的目标，可以在 <code>onEnter()</code>插入我们的dump代码：</p>
 <div class="highlight"><div class="chroma">
@@ -275,16 +275,16 @@ sub_16e3fb8: Loaded handler at &#34;/Users/john/__handlers__/UnityFramework/sub_
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">onEnter(log, args, state) {
-    log(&#39;sub_16e3fb8()&#39;);
-    log(&#34;[-] hook invoked&#34;);
-    log(JSON.stringify({
-                        a0: args[0],
-                    }, null, &#39;\t&#39;));
-    var dump = Memory.readByteArray(args[0], 0x100);
-    log(&#34;result:&#34; + hexdump(dump));
-  },
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">onEnter</span><span class="p">(</span><span class="nb">log</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">log</span><span class="p">(</span><span class="s1">&#39;sub_16e3fb8()&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">log</span><span class="p">(</span><span class="s2">&#34;[-] hook invoked&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">log</span><span class="p">(</span><span class="n">JSON</span><span class="o">.</span><span class="n">stringify</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">a0</span><span class="p">:</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">},</span> <span class="n">null</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="k">var</span> <span class="n">dump</span> <span class="o">=</span> <span class="n">Memory</span><span class="o">.</span><span class="n">readByteArray</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mh">0x100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">log</span><span class="p">(</span><span class="s2">&#34;result:&#34;</span> <span class="o">+</span> <span class="n">hexdump</span><span class="p">(</span><span class="n">dump</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>再看一下输出的结果：</p>
 <p><img src="/image/veve/10.png" alt="enter image description here"></p>
@@ -302,9 +302,9 @@ sub_16e3fb8: Loaded handler at &#34;/Users/john/__handlers__/UnityFramework/sub_
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(lldb) br s -a 0x107BC3FB8
-Breakpoint 2: where = UnityFramework`___lldb_unnamed_symbol122084$$UnityFramework, address = 0x0000000107bc3fb8
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">(lldb) br s -a 0x107BC3FB8
+</span></span><span class="line"><span class="cl">Breakpoint 2: where = UnityFramework`___lldb_unnamed_symbol122084$$UnityFramework, address = 0x0000000107bc3fb8
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后dump对应的文件：</p>
 <div class="highlight"><div class="chroma">
@@ -312,8 +312,8 @@ Breakpoint 2: where = UnityFramework`___lldb_unnamed_symbol122084$$UnityFramewor
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">po [[NSData dataWithBytes:(id)0x0000000139a25000 length:0x43563a] writeToFile:@&#34;/var/mobile/Containers/Data/Application/5520D425-CA51-47FB-AF93-172E1C2258CB/Documents/veve.ab&#34; atomically:YES]
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">po</span> <span class="p">[[</span><span class="n">NSData</span> <span class="n">dataWithBytes</span><span class="p">:(</span><span class="n">id</span><span class="p">)</span><span class="mh">0x0000000139a25000</span> <span class="n">length</span><span class="p">:</span><span class="mh">0x43563a</span><span class="p">]</span> <span class="n">writeToFile</span><span class="p">:</span><span class="err">@</span><span class="s2">&#34;/var/mobile/Containers/Data/Application/5520D425-CA51-47FB-AF93-172E1C2258CB/Documents/veve.ab&#34;</span> <span class="n">atomically</span><span class="p">:</span><span class="n">YES</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>到此我就拿到了<code>veve.ab</code>这个Unity文件，成功。</p>
 
@@ -385,7 +385,7 @@ Breakpoint 2: where = UnityFramework`___lldb_unnamed_symbol122084$$UnityFramewor
   <span class="copyright-year">
     &copy; 
     2021 - 
-    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>yingxinsong</span>
+    2024<span class="heart"><i class="iconfont icon-heart"></i></span><span>yingxinsong</span>
   </span>
 </div>
 
@@ -403,7 +403,7 @@ Breakpoint 2: where = UnityFramework`___lldb_unnamed_symbol122084$$UnityFramewor
 
 
 
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 <script type="application/javascript">

@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.92.2 with theme even" />
+<meta name="generator" content="Hugo 0.120.4 with theme even" />
 
 
 <link rel="canonical" href="https://www.yingxinsong.com/post/cvpixelbuffer/" />
@@ -49,7 +49,7 @@
 <meta itemprop="name" content="CVPixelbuffer与Flutter外接纹理">
 <meta itemprop="description" content="A Core Video pixel buffer is an image buffer that holds pixels in main memory. Applications generating frames, compressing or decompressing video, or using Core Image can all make use of Core Video pixel buffers. 背景 最近遇到一个问题，如何把一个mp4格式的灰度视频后处理上色后再给到"><meta itemprop="datePublished" content="2022-03-18T16:39:41+08:00" />
 <meta itemprop="dateModified" content="2022-03-18T16:39:41+08:00" />
-<meta itemprop="wordCount" content="3298">
+<meta itemprop="wordCount" content="3327">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="CVPixelbuffer与Flutter外接纹理"/>
 <meta name="twitter:description" content="A Core Video pixel buffer is an image buffer that holds pixels in main memory. Applications generating frames, compressing or decompressing video, or using Core Image can all make use of Core Video pixel buffers. 背景 最近遇到一个问题，如何把一个mp4格式的灰度视频后处理上色后再给到"/>
@@ -225,10 +225,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-mathematica" data-lang="mathematica"><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.164</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">2.018</span><span class="p">(</span><span class="n">U</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">128</span><span class="p">)</span><span class="w">
-</span><span class="w"></span><span class="n">G</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.164</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">0.813</span><span class="p">(</span><span class="n">V</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">128</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">0.391</span><span class="p">(</span><span class="n">U</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">128</span><span class="p">)</span><span class="w">
-</span><span class="w"></span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.164</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1.596</span><span class="p">(</span><span class="n">V</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">128</span><span class="p">)</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-mathematica" data-lang="mathematica"><span class="line"><span class="cl"><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.164</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">2.018</span><span class="p">(</span><span class="n">U</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">128</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">G</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.164</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">0.813</span><span class="p">(</span><span class="n">V</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">128</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">0.391</span><span class="p">(</span><span class="n">U</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">128</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.164</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1.596</span><span class="p">(</span><span class="n">V</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">128</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>这个方式的问题在于效率较低。</p>
 </li>
@@ -252,21 +252,21 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-glsl" data-lang="glsl"><span class="c1">// 使用GLSL</span>
-<span class="k">varying</span> <span class="k">mediump</span> <span class="k">vec2</span> <span class="n">textureCoordinate</span><span class="p">;</span>
-<span class="k">uniform</span> <span class="k">sampler2D</span> <span class="n">inputImageTexture</span><span class="p">;</span>
-<span class="k">void</span> <span class="n">main</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="k">mediump</span> <span class="k">vec3</span> <span class="n">yuv</span><span class="p">;</span>
-    <span class="k">mediump</span> <span class="k">vec3</span> <span class="n">rgb</span><span class="p">;</span>
-    <span class="n">yuv</span> <span class="o">=</span> <span class="n">texture2D</span><span class="p">(</span><span class="n">inputImageTexture</span><span class="p">,</span> <span class="n">textureCoordinate</span><span class="p">).</span><span class="n">rgb</span> <span class="o">-</span> <span class="k">vec3</span><span class="p">(</span><span class="mf">16.0</span><span class="o">/</span><span class="mf">255.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">);</span>
-
-    <span class="n">rgb</span> <span class="o">=</span> <span class="n">mat3</span><span class="p">(</span><span class="mf">1.164</span><span class="p">,</span> <span class="mf">1.164</span><span class="p">,</span> <span class="mf">1.164</span><span class="p">,</span>
-                <span class="mo">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">.392</span><span class="p">,</span> <span class="mf">2.017</span><span class="p">,</span>
-                <span class="mf">1.596</span><span class="p">,</span> <span class="o">-</span><span class="mf">.813</span><span class="p">,</span><span class="mo">0</span> <span class="p">)</span> <span class="o">*</span> <span class="n">yuv</span><span class="p">;</span>
-    <span class="n">gl_FragColor</span> <span class="o">=</span> <span class="k">vec4</span><span class="p">(</span><span class="n">rgb</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-glsl" data-lang="glsl"><span class="line"><span class="cl"><span class="c1">// 使用GLSL</span>
+</span></span><span class="line"><span class="cl"><span class="k">varying</span> <span class="k">mediump</span> <span class="k">vec2</span> <span class="n">textureCoordinate</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">uniform</span> <span class="k">sampler2D</span> <span class="n">inputImageTexture</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">void</span> <span class="n">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">mediump</span> <span class="k">vec3</span> <span class="n">yuv</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">mediump</span> <span class="k">vec3</span> <span class="n">rgb</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">yuv</span> <span class="o">=</span> <span class="n">texture2D</span><span class="p">(</span><span class="n">inputImageTexture</span><span class="p">,</span> <span class="n">textureCoordinate</span><span class="p">).</span><span class="n">rgb</span> <span class="o">-</span> <span class="k">vec3</span><span class="p">(</span><span class="mf">16.0</span><span class="o">/</span><span class="mf">255.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">rgb</span> <span class="o">=</span> <span class="n">mat3</span><span class="p">(</span><span class="mf">1.164</span><span class="p">,</span> <span class="mf">1.164</span><span class="p">,</span> <span class="mf">1.164</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="mo">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">.392</span><span class="p">,</span> <span class="mf">2.017</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="mf">1.596</span><span class="p">,</span> <span class="o">-</span><span class="mf">.813</span><span class="p">,</span><span class="mo">0</span> <span class="p">)</span> <span class="o">*</span> <span class="n">yuv</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gl_FragColor</span> <span class="o">=</span> <span class="k">vec4</span><span class="p">(</span><span class="n">rgb</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -275,10 +275,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-objective-c" data-lang="objective-c"><span class="c1">//使用v_Image
-</span><span class="c1"></span><span class="nl">https</span><span class="p">:</span><span class="c1">//gist.github.com/noppefoxwolf/26967db43fdd87662f37d2f73c863eb9
-</span><span class="c1"></span><span class="err">这个链接给出一个参考实现</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-objective-c" data-lang="objective-c"><span class="line"><span class="cl"><span class="c1">//使用v_Image
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nl">https</span><span class="p">:</span><span class="c1">//gist.github.com/noppefoxwolf/26967db43fdd87662f37d2f73c863eb9
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">这个链接给出一个参考实现</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 </ol>
@@ -310,20 +310,20 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="n">IOSExternalTextureGL</span><span class="o">::</span><span class="n">CreateTextureFromPixelBuffer</span><span class="p">()</span> <span class="p">{</span>
-  <span class="n">CVOpenGLESTextureRef</span> <span class="n">texture</span><span class="p">;</span>
-  <span class="n">CVReturn</span> <span class="n">err</span> <span class="o">=</span> <span class="n">CVOpenGLESTextureCacheCreateTextureFromImage</span><span class="p">(</span>
-      <span class="n">kCFAllocatorDefault</span><span class="p">,</span> <span class="n">cache_ref_</span><span class="p">,</span> <span class="n">buffer_ref_</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="n">GL_TEXTURE_2D</span><span class="p">,</span> <span class="n">GL_RGBA</span><span class="p">,</span>
-      <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">CVPixelBufferGetWidth</span><span class="p">(</span><span class="n">buffer_ref_</span><span class="p">)),</span>
-      <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">CVPixelBufferGetHeight</span><span class="p">(</span><span class="n">buffer_ref_</span><span class="p">)),</span> <span class="n">GL_BGRA</span><span class="p">,</span> <span class="n">GL_UNSIGNED_BYTE</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="o">&amp;</span><span class="n">texture</span><span class="p">);</span>
-  <span class="k">if</span> <span class="p">(</span><span class="n">err</span> <span class="o">!=</span> <span class="n">noErr</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">FML_LOG</span><span class="p">(</span><span class="n">WARNING</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Could not create texture from pixel buffer: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">err</span><span class="p">;</span>
-  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="n">texture_ref_</span><span class="p">.</span><span class="n">Reset</span><span class="p">(</span><span class="n">texture</span><span class="p">);</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">IOSExternalTextureGL</span><span class="o">::</span><span class="n">CreateTextureFromPixelBuffer</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">CVOpenGLESTextureRef</span> <span class="n">texture</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">CVReturn</span> <span class="n">err</span> <span class="o">=</span> <span class="n">CVOpenGLESTextureCacheCreateTextureFromImage</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="n">kCFAllocatorDefault</span><span class="p">,</span> <span class="n">cache_ref_</span><span class="p">,</span> <span class="n">buffer_ref_</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="n">GL_TEXTURE_2D</span><span class="p">,</span> <span class="n">GL_RGBA</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">CVPixelBufferGetWidth</span><span class="p">(</span><span class="n">buffer_ref_</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">      <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">CVPixelBufferGetHeight</span><span class="p">(</span><span class="n">buffer_ref_</span><span class="p">)),</span> <span class="n">GL_BGRA</span><span class="p">,</span> <span class="n">GL_UNSIGNED_BYTE</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&amp;</span><span class="n">texture</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">err</span> <span class="o">!=</span> <span class="n">noErr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">FML_LOG</span><span class="p">(</span><span class="n">WARNING</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Could not create texture from pixel buffer: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">err</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">texture_ref_</span><span class="p">.</span><span class="n">Reset</span><span class="p">(</span><span class="n">texture</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里的CVOpenGLESTextureCacheCreateTextureFromImage所创建的纹理就是直接映射到我们创建的CVPixebuffer的。</p>
 </li>
@@ -345,17 +345,17 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-objective-c" data-lang="objective-c"><span class="n">NSDictionary</span> <span class="o">*</span><span class="n">pixelBufferAttributes</span> <span class="o">=</span> <span class="l">@{</span>
-       <span class="p">(</span><span class="k">__bridge</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nl">kCVPixelBufferPixelFormatTypeKey</span><span class="p">:</span> <span class="l">@(</span><span class="n">kCVPixelFormatType_32BGRA</span><span class="l">)</span><span class="p">,</span> <span class="c1">// 设置为BGRA格式
-</span><span class="c1"></span>       <span class="p">(</span><span class="k">__bridge</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nl">kCVPixelBufferWidthKey</span><span class="p">:</span> <span class="l">@(</span><span class="n">width</span><span class="l">)</span><span class="p">,</span> <span class="c1">// 图像宽度
-</span><span class="c1"></span>       <span class="p">(</span><span class="k">__bridge</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nl">kCVPixelBufferHeightKey</span><span class="p">:</span> <span class="l">@(</span><span class="n">height</span><span class="l">)</span><span class="p">,</span> <span class="c1">// 图像高度
-</span><span class="c1"></span>       <span class="p">(</span><span class="k">__bridge</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nl">kCVPixelBufferIOSurfacePropertiesKey</span><span class="p">:</span> <span class="l">@{}</span><span class="p">,</span> <span class="c1">// IOSurface-backed
-</span><span class="c1"></span>       <span class="p">(</span><span class="k">__bridge</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nl">kCVPixelBufferMetalCompatibilityKey</span><span class="p">:</span> <span class="m">@YES</span><span class="p">,</span> <span class="c1">// Metal 可访问
-</span><span class="c1"></span>    <span class="cp">#if TARGET_OS_IPHONE
-</span><span class="cp"></span>       <span class="p">(</span><span class="k">__bridge</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nl">kCVPixelBufferOpenGLESCompatibilityKey</span><span class="p">:</span> <span class="m">@YES</span><span class="p">,</span> <span class="c1">// OpenGL可访问
-</span><span class="c1"></span>    <span class="cp">#endif
-</span><span class="cp"></span>    <span class="l">}</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-objective-c" data-lang="objective-c"><span class="line"><span class="cl"><span class="n">NSDictionary</span> <span class="o">*</span><span class="n">pixelBufferAttributes</span> <span class="o">=</span> <span class="l">@{</span>
+</span></span><span class="line"><span class="cl">       <span class="p">(</span><span class="k">__bridge</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nl">kCVPixelBufferPixelFormatTypeKey</span><span class="p">:</span> <span class="l">@(</span><span class="n">kCVPixelFormatType_32BGRA</span><span class="l">)</span><span class="p">,</span> <span class="c1">// 设置为BGRA格式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>       <span class="p">(</span><span class="k">__bridge</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nl">kCVPixelBufferWidthKey</span><span class="p">:</span> <span class="l">@(</span><span class="n">width</span><span class="l">)</span><span class="p">,</span> <span class="c1">// 图像宽度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>       <span class="p">(</span><span class="k">__bridge</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nl">kCVPixelBufferHeightKey</span><span class="p">:</span> <span class="l">@(</span><span class="n">height</span><span class="l">)</span><span class="p">,</span> <span class="c1">// 图像高度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>       <span class="p">(</span><span class="k">__bridge</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nl">kCVPixelBufferIOSurfacePropertiesKey</span><span class="p">:</span> <span class="l">@{}</span><span class="p">,</span> <span class="c1">// IOSurface-backed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>       <span class="p">(</span><span class="k">__bridge</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nl">kCVPixelBufferMetalCompatibilityKey</span><span class="p">:</span> <span class="m">@YES</span><span class="p">,</span> <span class="c1">// Metal 可访问
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="cp">#if TARGET_OS_IPHONE
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>       <span class="p">(</span><span class="k">__bridge</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nl">kCVPixelBufferOpenGLESCompatibilityKey</span><span class="p">:</span> <span class="m">@YES</span><span class="p">,</span> <span class="c1">// OpenGL可访问
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="l">}</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后就可以开始创建CVPixelBuffer:</p>
 <div class="highlight"><div class="chroma">
@@ -369,14 +369,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-objc" data-lang="objc"><span class="n">CVPixelBufferRef</span> <span class="n">pixelbuffer</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
-<span class="n">CVPixelBufferCreate</span><span class="p">(</span><span class="n">kCFAllocatorDefault</span><span class="p">,</span>
-                       <span class="n">width</span><span class="p">,</span>
-                       <span class="n">height</span><span class="p">,</span>
-                       <span class="n">kCVPixelFormatType_32BGRA</span><span class="p">,</span>
-                       <span class="p">(</span><span class="k">__bridge</span>  <span class="n">CFDictionaryRef</span><span class="p">)</span><span class="n">pixelBufferAttributes</span><span class="p">,</span>
-                       <span class="o">&amp;</span><span class="n">pixelbuffer</span><span class="p">);</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-objc" data-lang="objc"><span class="line"><span class="cl"><span class="n">CVPixelBufferRef</span> <span class="n">pixelbuffer</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">CVPixelBufferCreate</span><span class="p">(</span><span class="n">kCFAllocatorDefault</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="n">width</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="n">height</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="n">kCVPixelFormatType_32BGRA</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="p">(</span><span class="k">__bridge</span>  <span class="n">CFDictionaryRef</span><span class="p">)</span><span class="n">pixelBufferAttributes</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="o">&amp;</span><span class="n">pixelbuffer</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>在这一步后面，直接把原始的BGRA拷贝进去，就会出现上面的花屏问题。原因是因为iOS要求图像宽度必须能被16整除，那么如果我们传入一个1080的图像，他实际在内存中的宽度为1088。所以，我们需要按照图像可对其的方式去拷贝：</p>
 <div class="highlight"><div class="chroma">
@@ -403,27 +403,27 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="k">static</span> <span class="kt">void</span> <span class="nf">copyImagePlane</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="o">*</span><span class="n">dst</span><span class="p">,</span>
-                           <span class="kt">int</span> <span class="n">dstLinesize</span><span class="p">,</span>
-                           <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">src</span><span class="p">,</span>
-                           <span class="kt">int</span> <span class="n">srcLinesize</span><span class="p">,</span>
-                           <span class="kt">int</span> <span class="n">bytewidth</span><span class="p">,</span>
-                           <span class="kt">int</span> <span class="n">height</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">dst</span> <span class="o">||</span> <span class="o">!</span><span class="n">src</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="k">if</span> <span class="p">(</span><span class="n">dstLinesize</span> <span class="o">&lt;</span> <span class="n">bytewidth</span> <span class="o">||</span> <span class="n">srcLinesize</span> <span class="o">&lt;</span> <span class="n">bytewidth</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="k">for</span> <span class="p">(;</span> <span class="n">height</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="n">height</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">memcpy</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">bytewidth</span><span class="p">);</span>
-    <span class="n">dst</span> <span class="o">+=</span> <span class="n">dstLinesize</span><span class="p">;</span>
-    <span class="n">src</span> <span class="o">+=</span> <span class="n">srcLinesize</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span> <span class="nf">copyImagePlane</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="o">*</span><span class="n">dst</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                           <span class="kt">int</span> <span class="n">dstLinesize</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                           <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">src</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                           <span class="kt">int</span> <span class="n">srcLinesize</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                           <span class="kt">int</span> <span class="n">bytewidth</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                           <span class="kt">int</span> <span class="n">height</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">dst</span> <span class="o">||</span> <span class="o">!</span><span class="n">src</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">dstLinesize</span> <span class="o">&lt;</span> <span class="n">bytewidth</span> <span class="o">||</span> <span class="n">srcLinesize</span> <span class="o">&lt;</span> <span class="n">bytewidth</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(;</span> <span class="n">height</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="n">height</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">memcpy</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">bytewidth</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dst</span> <span class="o">+=</span> <span class="n">dstLinesize</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">src</span> <span class="o">+=</span> <span class="n">srcLinesize</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这样就可以解决内存拷贝时不对齐的问题。</p>
 </li>
@@ -441,12 +441,12 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-objective-c" data-lang="objective-c"><span class="cm">/*!
-</span><span class="cm"> @method getBytes:bytesPerRow:fromRegion:mipmapLevel:
-</span><span class="cm"> @abstract Convenience for getBytes:bytesPerRow:bytesPerImage:fromRegion:mipmapLevel:slice: that doesn&#39;t require slice related arguments
-</span><span class="cm"> */</span>
-<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">getBytes:</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="nv">pixelBytes</span> <span class="nf">bytesPerRow:</span><span class="p">(</span><span class="n">NSUInteger</span><span class="p">)</span><span class="nv">bytesPerRow</span> <span class="nf">fromRegion:</span><span class="p">(</span><span class="n">MTLRegion</span><span class="p">)</span><span class="nv">region</span> <span class="nf">mipmapLevel:</span><span class="p">(</span><span class="n">NSUInteger</span><span class="p">)</span><span class="nv">level</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-objective-c" data-lang="objective-c"><span class="line"><span class="cl"><span class="cm">/*!
+</span></span></span><span class="line"><span class="cl"><span class="cm"> @method getBytes:bytesPerRow:fromRegion:mipmapLevel:
+</span></span></span><span class="line"><span class="cl"><span class="cm"> @abstract Convenience for getBytes:bytesPerRow:bytesPerImage:fromRegion:mipmapLevel:slice: that doesn&#39;t require slice related arguments
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">getBytes:</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="nv">pixelBytes</span> <span class="nf">bytesPerRow:</span><span class="p">(</span><span class="n">NSUInteger</span><span class="p">)</span><span class="nv">bytesPerRow</span> <span class="nf">fromRegion:</span><span class="p">(</span><span class="n">MTLRegion</span><span class="p">)</span><span class="nv">region</span> <span class="nf">mipmapLevel:</span><span class="p">(</span><span class="n">NSUInteger</span><span class="p">)</span><span class="nv">level</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>但是这里却不建议这么做，原因在于Metal在处理纹理数据的时候，为了性能以及带宽的优化，对纹理数据做了压缩，当用这个接口提取纹理数据时到内存中时，需要先把纹理做一次解压缩。解决办法有下面两个：</p>
 <ol>
@@ -481,33 +481,31 @@
 </span><span class="lnt">20
 </span><span class="lnt">21
 </span><span class="lnt">22
-</span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-objective-c" data-lang="objective-c"><span class="c1">// 传入原始的BGRA数据
-</span><span class="c1"></span><span class="n">GPUImageRawDataInput</span> <span class="o">*</span><span class="n">input</span> <span class="o">=</span> <span class="p">[[</span><span class="n">GPUImageRawDataInput</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithBytes</span><span class="p">:</span><span class="n">data</span> <span class="nl">size</span><span class="p">:</span><span class="n">CGSizeMake</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span> <span class="nl">pixelFormat</span><span class="p">:</span><span class="n">GPUPixelFormatBGRA</span><span class="p">];</span>
-
-<span class="c1">// 创建滤镜
-</span><span class="c1"></span><span class="n">ColorFillter</span> <span class="o">*</span><span class="n">filter</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ColorFillter</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
-<span class="n">filter</span><span class="p">.</span><span class="n">blackColor</span> <span class="o">=</span> <span class="p">(</span><span class="n">GPUVector3</span><span class="p">){</span><span class="mf">0.71</span><span class="p">,</span> <span class="mf">0.49</span><span class="p">,</span> <span class="mf">0.61</span><span class="p">};</span>
-<span class="n">filter</span><span class="p">.</span><span class="n">whiteColor</span> <span class="o">=</span> <span class="p">(</span><span class="n">GPUVector3</span><span class="p">){</span><span class="mf">0.56</span><span class="p">,</span> <span class="mf">0.56</span><span class="p">,</span> <span class="mf">0.69</span><span class="p">};</span>
-<span class="p">[</span><span class="n">input</span> <span class="nl">addTarget</span><span class="p">:</span><span class="n">filter</span><span class="p">];</span>
-
-<span class="c1">// 创建BGRA输出
-</span><span class="c1"></span><span class="n">GPUImageRawDataOutput</span> <span class="o">*</span><span class="n">output</span> <span class="o">=</span> <span class="p">[[</span><span class="n">GPUImageRawDataOutput</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithImageSize</span><span class="p">:</span><span class="n">CGSizeMake</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>    <span class="nl">resultsInBGRAFormat</span><span class="p">:</span><span class="nb">YES</span><span class="p">];</span>
-<span class="p">[</span><span class="n">filter</span> <span class="nl">addTarget</span><span class="p">:</span><span class="n">output</span><span class="p">];</span>
-<span class="p">[</span><span class="n">filter</span> <span class="n">useNextFrameForImageCapture</span><span class="p">];</span>
-<span class="c1">// 开始渲染
-</span><span class="c1"></span><span class="p">[</span><span class="n">input</span> <span class="n">processData</span><span class="p">];</span>
-
-<span class="p">[</span><span class="n">output</span> <span class="n">lockFramebufferForReading</span><span class="p">];</span>
-<span class="c1">// 读取创建的CVPixelBuffer基地址
-</span><span class="c1"></span><span class="n">uint8_t</span> <span class="o">*</span><span class="n">dstBuffer</span> <span class="o">=</span> <span class="p">(</span><span class="n">uint8_t</span> <span class="o">*</span><span class="p">)</span><span class="n">CVPixelBufferGetBaseAddress</span><span class="p">(</span><span class="n">pixelbuffer</span><span class="p">);</span>
-<span class="c1">// 拷贝进去
-</span><span class="c1"></span><span class="n">memcpy</span><span class="p">(</span><span class="n">dstBuffer</span><span class="p">,</span> <span class="n">output</span><span class="p">.</span><span class="n">rawBytesForImage</span><span class="p">,</span> <span class="n">output</span><span class="p">.</span><span class="n">bytesPerRowInOutput</span><span class="o">*</span><span class="n">height</span><span class="p">);</span>
-<span class="p">[</span><span class="n">output</span> <span class="n">unlockFramebufferAfterReading</span><span class="p">];</span>
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-objective-c" data-lang="objective-c"><span class="line"><span class="cl"><span class="c1">// 传入原始的BGRA数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">GPUImageRawDataInput</span> <span class="o">*</span><span class="n">input</span> <span class="o">=</span> <span class="p">[[</span><span class="n">GPUImageRawDataInput</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithBytes</span><span class="p">:</span><span class="n">data</span> <span class="nl">size</span><span class="p">:</span><span class="n">CGSizeMake</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span> <span class="nl">pixelFormat</span><span class="p">:</span><span class="n">GPUPixelFormatBGRA</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 创建滤镜
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">ColorFillter</span> <span class="o">*</span><span class="n">filter</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ColorFillter</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="n">filter</span><span class="p">.</span><span class="n">blackColor</span> <span class="o">=</span> <span class="p">(</span><span class="n">GPUVector3</span><span class="p">){</span><span class="mf">0.71</span><span class="p">,</span> <span class="mf">0.49</span><span class="p">,</span> <span class="mf">0.61</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="n">filter</span><span class="p">.</span><span class="n">whiteColor</span> <span class="o">=</span> <span class="p">(</span><span class="n">GPUVector3</span><span class="p">){</span><span class="mf">0.56</span><span class="p">,</span> <span class="mf">0.56</span><span class="p">,</span> <span class="mf">0.69</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">input</span> <span class="nl">addTarget</span><span class="p">:</span><span class="n">filter</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 创建BGRA输出
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">GPUImageRawDataOutput</span> <span class="o">*</span><span class="n">output</span> <span class="o">=</span> <span class="p">[[</span><span class="n">GPUImageRawDataOutput</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithImageSize</span><span class="p">:</span><span class="n">CGSizeMake</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>    <span class="nl">resultsInBGRAFormat</span><span class="p">:</span><span class="nb">YES</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">filter</span> <span class="nl">addTarget</span><span class="p">:</span><span class="n">output</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">filter</span> <span class="n">useNextFrameForImageCapture</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 开始渲染
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">[</span><span class="n">input</span> <span class="n">processData</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">output</span> <span class="n">lockFramebufferForReading</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 读取创建的CVPixelBuffer基地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">uint8_t</span> <span class="o">*</span><span class="n">dstBuffer</span> <span class="o">=</span> <span class="p">(</span><span class="n">uint8_t</span> <span class="o">*</span><span class="p">)</span><span class="n">CVPixelBufferGetBaseAddress</span><span class="p">(</span><span class="n">pixelbuffer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 拷贝进去
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">memcpy</span><span class="p">(</span><span class="n">dstBuffer</span><span class="p">,</span> <span class="n">output</span><span class="p">.</span><span class="n">rawBytesForImage</span><span class="p">,</span> <span class="n">output</span><span class="p">.</span><span class="n">bytesPerRowInOutput</span><span class="o">*</span><span class="n">height</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">output</span> <span class="n">unlockFramebufferAfterReading</span><span class="p">];</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="总结">总结</h3>
 <p>原本想着只是一个简简单单的需求，但是却没有想到在图像在CPU-GPU之间拷贝的过程中遇到了不少问题，在问题的解决上，一方面建议多了解系统底层实现与原理，另一方面也要对图像格式，音视频处理更加熟悉。</p>
@@ -582,7 +580,7 @@
   <span class="copyright-year">
     &copy; 
     2021 - 
-    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>yingxinsong</span>
+    2024<span class="heart"><i class="iconfont icon-heart"></i></span><span>yingxinsong</span>
   </span>
 </div>
 
@@ -600,7 +598,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 <script type="application/javascript">

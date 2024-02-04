@@ -6,78 +6,70 @@
     <description>Recent content on Kapuseru</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 19 Oct 2023 10:14:29 +0800</lastBuildDate><atom:link href="https://www.yingxinsong.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 29 Jan 2024 15:05:46 +0800</lastBuildDate>
+    <atom:link href="https://www.yingxinsong.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>总结2023</title>
+      <link>https://www.yingxinsong.com/post/2023/</link>
+      <pubDate>Mon, 29 Jan 2024 15:05:46 +0800</pubDate>
+      <guid>https://www.yingxinsong.com/post/2023/</guid>
+      <description>种一棵树最好的时间是十年前，其次是现在 —— https://zachklein.com/Sidewalk+Garden ​ 现在是2024年，十年前的这个时候我决定离开北京，从一个看不到前途的公司离职，来到了深圳。我还</description>
+    </item>
     <item>
       <title>有些事适合长话短说</title>
       <link>https://www.yingxinsong.com/post/fishing_plan_2024/</link>
       <pubDate>Thu, 19 Oct 2023 10:14:29 +0800</pubDate>
-      
       <guid>https://www.yingxinsong.com/post/fishing_plan_2024/</guid>
       <description>Naval Ravikant 把自己的话整理到Twitter，Twitter的字数限制，有助于把思想压缩，其实我写博客也应该如此，长篇大论的废话有多少是经过深度思考的</description>
     </item>
-    
     <item>
       <title>大厂职级晋升指南</title>
       <link>https://www.yingxinsong.com/post/grow_up_with_pain/</link>
       <pubDate>Tue, 17 Oct 2023 00:56:37 +0800</pubDate>
-      
       <guid>https://www.yingxinsong.com/post/grow_up_with_pain/</guid>
       <description>序言 这篇总结文档起初创建于2023年的2月1日，当时我正在准备冲刺晋升专家答辩的PPT，想到此次就算没有通过，那么也应该对职级晋升这件事情做</description>
     </item>
-    
     <item>
       <title>移动端支付链路优化指南</title>
       <link>https://www.yingxinsong.com/post/optimize_iap_purchase/</link>
       <pubDate>Wed, 30 Nov 2022 16:38:55 +0800</pubDate>
-      
       <guid>https://www.yingxinsong.com/post/optimize_iap_purchase/</guid>
       <description>TL;DR 序 ​ 一个用户流失的可能性有很多种，不过我相信你最不愿意的就是他在支付、购买的过程中流失。一方面，付费的用户往往粘性更高，停留时间更长，这对</description>
     </item>
-    
     <item>
       <title>CVPixelbuffer与Flutter外接纹理</title>
       <link>https://www.yingxinsong.com/post/cvpixelbuffer/</link>
       <pubDate>Fri, 18 Mar 2022 16:39:41 +0800</pubDate>
-      
       <guid>https://www.yingxinsong.com/post/cvpixelbuffer/</guid>
       <description>A Core Video pixel buffer is an image buffer that holds pixels in main memory. Applications generating frames, compressing or decompressing video, or using Core Image can all make use of Core Video pixel buffers. 背景 最近遇到一个问题，如何把一个mp4格式的灰度视频后处理上色后再给到</description>
     </item>
-    
     <item>
       <title>2021年度总结</title>
       <link>https://www.yingxinsong.com/post/what-i-learned-from-2021/</link>
       <pubDate>Wed, 22 Dec 2021 16:19:08 +0800</pubDate>
-      
       <guid>https://www.yingxinsong.com/post/what-i-learned-from-2021/</guid>
       <description>如何做年终总结 最近几年特别流行年度盘点，音乐类的App会总结你听了多少歌，银行类的App会总结你收入支出多少，最牛的是本地生活类的App，会</description>
     </item>
-    
     <item>
       <title>直播中台搭建指南</title>
       <link>https://www.yingxinsong.com/post/build_live_center/</link>
       <pubDate>Thu, 02 Dec 2021 17:22:23 +0800</pubDate>
-      
       <guid>https://www.yingxinsong.com/post/build_live_center/</guid>
       <description>前言 自从头条搭上短视频这条快车道，做出了抖音这款风靡全世界的现象级产品。人们不禁都在想，他们到底用了什么技术？为什么头条能成功？其中不乏有神</description>
     </item>
-    
     <item>
       <title>工程师自检手册</title>
       <link>https://www.yingxinsong.com/post/hiring/</link>
       <pubDate>Thu, 30 Sep 2021 17:22:36 +0800</pubDate>
-      
       <guid>https://www.yingxinsong.com/post/hiring/</guid>
       <description>在这个职场中，我觉得每一个单纯的工程师都应该有一个要做与不要做的手册，每次头脑发热做事情的时候，应该拿出来自检一下。下面，就是我从很多地方吸</description>
     </item>
-    
     <item>
       <title>逆向Unity3D Asset Bundle</title>
       <link>https://www.yingxinsong.com/post/unity3d-decrypt/</link>
       <pubDate>Tue, 28 Sep 2021 12:36:50 +0800</pubDate>
-      
       <guid>https://www.yingxinsong.com/post/unity3d-decrypt/</guid>
       <description>前几个月因为项目的原因，想要看一下一个售卖3D手办的软件是怎么实现的，并且想看看有没有能力获取到里面的3D模型。拿到安装包之后，还是按照惯例</description>
     </item>
-    
   </channel>
 </rss>

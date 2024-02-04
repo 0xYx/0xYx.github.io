@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.92.2 with theme even" />
+<meta name="generator" content="Hugo 0.120.4 with theme even" />
 
 
 <link rel="canonical" href="https://www.yingxinsong.com/post/optimize_iap_purchase/" />
@@ -180,8 +180,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">支付转化率 = 支付成功人数/营销页面曝光数
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">支付转化率 = 支付成功人数/营销页面曝光数
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>但，当整个支付转化漏斗还没有建立完整的时候，是不建议以页面曝光为支付转化流程中的起点的，原因是往往营销策略决定了用户支付的意愿，从而不同营销策略带来的支付转化率相差较大，研发同学是无从优化的。</p>
 <h3 id="支付转化率">支付转化率</h3>
@@ -191,8 +191,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">支付转化率 = 支付成功人次/发起支付的次数
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">支付转化率 = 支付成功人次/发起支付的次数
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这样的好处在于，发起支付到支付成功，衡量的是支付能力的成功率，发起支付等于用户已经有了购买意愿，所以这就与营销策略无关了。</p>
 <p>要建立这个漏斗，可以按照下面几个步骤来实施：</p>
@@ -405,18 +405,18 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> // 原错误信息
- 支付失败: error: Error Domain=SKErrorDomain Code=0 &#34;发生未知错误&#34; 
- UserInfo={NSLocalizedDescription=发生未知错误, NSUnderlyingError=0x282528150 {Error Domain=ASDServerErrorDomain Code=3532 &#34;您目前已订阅此项目&#34; UserInfo={NSLocalizedDescription=您目前已订阅此项目}}}，
- 
- // 内层错误码
- errorInfo: {
-    resultCode = 4;
-    resultInnerCode = 0;
-    resultMsg = &#34;Error Domain=SKErrorDomain Code=0 \&#34;\U53d1\U751f\U672a\U77e5\U9519\U8bef\&#34; UserInfo={NSLocalizedDescription=\U53d1\U751f\U672a\U77e5\U9519\U8bef, NSUnderlyingError=0x282528150 {Error Domain=ASDServerErrorDomain Code=3532 \&#34;\U60a8\U76ee\U524d\U5df2\U8ba2\U9605\U6b64\U9879\U76ee\&#34; UserInfo={NSLocalizedDescription=\U60a8\U76ee\U524d\U5df2\U8ba2\U9605\U6b64\U9879\U76ee}}}&#34;;
-    workingStep = 6;
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"> // 原错误信息
+</span></span><span class="line"><span class="cl"> 支付失败: error: Error Domain=SKErrorDomain Code=0 &#34;发生未知错误&#34; 
+</span></span><span class="line"><span class="cl"> UserInfo={NSLocalizedDescription=发生未知错误, NSUnderlyingError=0x282528150 {Error Domain=ASDServerErrorDomain Code=3532 &#34;您目前已订阅此项目&#34; UserInfo={NSLocalizedDescription=您目前已订阅此项目}}}，
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"> // 内层错误码
+</span></span><span class="line"><span class="cl"> errorInfo: {
+</span></span><span class="line"><span class="cl">    resultCode = 4;
+</span></span><span class="line"><span class="cl">    resultInnerCode = 0;
+</span></span><span class="line"><span class="cl">    resultMsg = &#34;Error Domain=SKErrorDomain Code=0 \&#34;\U53d1\U751f\U672a\U77e5\U9519\U8bef\&#34; UserInfo={NSLocalizedDescription=\U53d1\U751f\U672a\U77e5\U9519\U8bef, NSUnderlyingError=0x282528150 {Error Domain=ASDServerErrorDomain Code=3532 \&#34;\U60a8\U76ee\U524d\U5df2\U8ba2\U9605\U6b64\U9879\U76ee\&#34; UserInfo={NSLocalizedDescription=\U60a8\U76ee\U524d\U5df2\U8ba2\U9605\U6b64\U9879\U76ee}}}&#34;;
+</span></span><span class="line"><span class="cl">    workingStep = 6;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>所以iAP支付类的错误，我们就可以获取到</p>
 <ul>
@@ -542,8 +542,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">提升比例 = 总转化率 - 杀进程后当日仍然购买成功用户比例
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">提升比例 = 总转化率 - 杀进程后当日仍然购买成功用户比例
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="三增加流量">三、增加流量</h2>
 <p>要优化支付链路，降低损耗是可以增加利润，但是如果目标更高，还需要通过进一步的提升天花板，笔者之前参与的一个企业内部培训分享为这个问题提供了三种解决办法：</p>
@@ -745,7 +745,7 @@
   <span class="copyright-year">
     &copy; 
     2021 - 
-    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>yingxinsong</span>
+    2024<span class="heart"><i class="iconfont icon-heart"></i></span><span>yingxinsong</span>
   </span>
 </div>
 
@@ -763,7 +763,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 <script type="application/javascript">
