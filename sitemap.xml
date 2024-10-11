@@ -3,14 +3,21 @@
   
   <url>
     <loc>https://www.yingxinsong.com/</loc>
-    <lastmod>2024-01-29T15:05:46+08:00</lastmod>
+    <lastmod>2024-10-11T16:06:08+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://www.yingxinsong.com/post/</loc>
-    <lastmod>2024-01-29T15:05:46+08:00</lastmod>
+    <lastmod>2024-10-11T16:06:08+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.yingxinsong.com/post/lake_biwa_fishing/</loc>
+    <lastmod>2024-10-11T16:06:08+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
