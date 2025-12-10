@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>逆向 on Kapuseru</title>
+    <title>逆向 - 标签 - Kapuseru</title>
     <link>https://www.yingxinsong.com/tags/%E9%80%86%E5%90%91/</link>
-    <description>Recent content in 逆向 on Kapuseru</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <description>カプセル</description>
+    <generator>Hugo 0.152.2 &amp; FixIt v0.4.0-alpha.3-20251128065536-6d00e42b</generator>
+    <language>zh-cn</language>
     <lastBuildDate>Tue, 28 Sep 2021 12:36:50 +0800</lastBuildDate>
     <atom:link href="https://www.yingxinsong.com/tags/%E9%80%86%E5%90%91/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -13,7 +13,7 @@
       <link>https://www.yingxinsong.com/post/unity3d-decrypt/</link>
       <pubDate>Tue, 28 Sep 2021 12:36:50 +0800</pubDate>
       <guid>https://www.yingxinsong.com/post/unity3d-decrypt/</guid>
-      <description>前几个月因为项目的原因，想要看一下一个售卖3D手办的软件是怎么实现的，并且想看看有没有能力获取到里面的3D模型。拿到安装包之后，还是按照惯例</description>
+      <description>&lt;p&gt;前几个月因为项目的原因，想要看一下一个售卖3D手办的软件是怎么实现的，并且想看看有没有能力获取到里面的3D模型。拿到安装包之后，还是按照惯例直接砸壳调试分析了一下：&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

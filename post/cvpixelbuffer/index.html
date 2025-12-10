@@ -1,172 +1,95 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>CVPixelbuffer与Flutter外接纹理 - Kapuseru</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>CVPixelbuffer与Flutter外接纹理 - Kapuseru</title><meta name="author" content="john">
+<meta name="description" content=" A Core Video pixel buffer is an image buffer that holds pixels in main memory. Applications generating frames, compressing or decompressing video, or using Core Image can all make use of Core Video pixel buffers.
+背景 最近遇到一个问题，如何把一个mp4格式的灰度视频后处理上色后再给到Flutter渲染？ "><meta name="keywords" content='Fishing, Tech, Life'>
+  <meta itemprop="name" content="CVPixelbuffer与Flutter外接纹理">
+  <meta itemprop="description" content="A Core Video pixel buffer is an image buffer that holds pixels in main memory. Applications generating frames, compressing or decompressing video, or using Core Image can all make use of Core Video pixel buffers.
+背景 最近遇到一个问题，如何把一个mp4格式的灰度视频后处理上色后再给到Flutter渲染？">
+  <meta itemprop="datePublished" content="2022-03-18T16:39:41+08:00">
+  <meta itemprop="dateModified" content="2022-03-18T16:39:41+08:00">
+  <meta itemprop="wordCount" content="3327"><meta property="og:url" content="https://www.yingxinsong.com/post/cvpixelbuffer/">
+  <meta property="og:site_name" content="Kapuseru">
+  <meta property="og:title" content="CVPixelbuffer与Flutter外接纹理">
+  <meta property="og:description" content="A Core Video pixel buffer is an image buffer that holds pixels in main memory. Applications generating frames, compressing or decompressing video, or using Core Image can all make use of Core Video pixel buffers.
+背景 最近遇到一个问题，如何把一个mp4格式的灰度视频后处理上色后再给到Flutter渲染？">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2022-03-18T16:39:41+08:00">
+    <meta property="article:modified_time" content="2022-03-18T16:39:41+08:00">
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="yingxinsong" /><meta name="description" content="A Core Video pixel buffer is an image buffer that holds pixels in main memory. Applications generating frames, compressing or decompressing video, or using Core Image can all make use of Core Video pixel buffers. 背景 最近遇到一个问题，如何把一个mp4格式的灰度视频后处理上色后再给到" /><meta name="keywords" content="Fishing, Tech, Life" />
-
-
-
-
-
-
-<meta name="generator" content="Hugo 0.120.4 with theme even" />
-
-
-<link rel="canonical" href="https://www.yingxinsong.com/post/cvpixelbuffer/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-
-
-<link href="/sass/main.min.b874a8796a492f0d7c86bb24c33cbf052935783a5778ebaf819a8e514bf49f10.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-
-
-<meta property="og:title" content="CVPixelbuffer与Flutter外接纹理" />
-<meta property="og:description" content="A Core Video pixel buffer is an image buffer that holds pixels in main memory. Applications generating frames, compressing or decompressing video, or using Core Image can all make use of Core Video pixel buffers. 背景 最近遇到一个问题，如何把一个mp4格式的灰度视频后处理上色后再给到" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.yingxinsong.com/post/cvpixelbuffer/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-03-18T16:39:41+08:00" />
-<meta property="article:modified_time" content="2022-03-18T16:39:41+08:00" />
-
-<meta itemprop="name" content="CVPixelbuffer与Flutter外接纹理">
-<meta itemprop="description" content="A Core Video pixel buffer is an image buffer that holds pixels in main memory. Applications generating frames, compressing or decompressing video, or using Core Image can all make use of Core Video pixel buffers. 背景 最近遇到一个问题，如何把一个mp4格式的灰度视频后处理上色后再给到"><meta itemprop="datePublished" content="2022-03-18T16:39:41+08:00" />
-<meta itemprop="dateModified" content="2022-03-18T16:39:41+08:00" />
-<meta itemprop="wordCount" content="3327">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="CVPixelbuffer与Flutter外接纹理"/>
-<meta name="twitter:description" content="A Core Video pixel buffer is an image buffer that holds pixels in main memory. Applications generating frames, compressing or decompressing video, or using Core Image can all make use of Core Video pixel buffers. 背景 最近遇到一个问题，如何把一个mp4格式的灰度视频后处理上色后再给到"/>
-
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
-
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
-</head>
-<body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">Kapuseru</a>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="CVPixelbuffer与Flutter外接纹理">
+  <meta name="twitter:description" content="A Core Video pixel buffer is an image buffer that holds pixels in main memory. Applications generating frames, compressing or decompressing video, or using Core Image can all make use of Core Video pixel buffers.
+背景 最近遇到一个问题，如何把一个mp4格式的灰度视频后处理上色后再给到Flutter渲染？">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://www.yingxinsong.com/post/cvpixelbuffer/" title="CVPixelbuffer与Flutter外接纹理 - Kapuseru" /><link rel="prev" type="text/html" href="https://www.yingxinsong.com/post/what-i-learned-from-2021/" title="2021年度总结" /><link rel="next" type="text/html" href="https://www.yingxinsong.com/post/optimize_iap_purchase/" title="移动端支付链路优化指南" /><link rel="stylesheet" href="/css/config.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "CVPixelbuffer与Flutter外接纹理",
+    "inLanguage": "zh-cn",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/www.yingxinsong.com\/post\/cvpixelbuffer\/"
+    },"genre": "post","wordcount":  3327 ,
+    "url": "https:\/\/www.yingxinsong.com\/post\/cvpixelbuffer\/","datePublished": "2022-03-18T16:39:41+08:00","dateModified": "2022-03-18T16:39:41+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "john"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-instant-intensity="viewport" data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Kapuseru"><span class="header-title-text">Kapuseru</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a class="menu-link" href="/">Home</a></li><li class="menu-item">
+              <a class="menu-link" href="/post/">Archives</a></li><li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a></li><li class="menu-item">
+              <a class="menu-link" href="/categories/">Categories</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" role="button" aria-label="切换主题" title="切换主题"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></li></ul>
+    </nav>
   </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/">
-        <li class="mobile-menu-item">Home</li>
-      </a><a href="/post/">
-        <li class="mobile-menu-item">Archives</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
-      </a>
-  </ul>
-
-  
-
-
-</nav>
-
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">Kapuseru</a>
-</div>
-
-
-
-
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/">Home</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">Archives</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
-      </li>
-  </ul>
-</nav>
-
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">CVPixelbuffer与Flutter外接纹理</h1>
-
-      <div class="post-meta">
-        <span class="post-time"> 2022-03-18 </span>
-        
-        
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Kapuseru"><span class="header-title-text">Kapuseru</span></a><span class="header-subtitle"></span></div>
+      <div class="theme-switch" role="button" aria-label="切换主题"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></div>
+      <div class="menu-toggle" id="menu-toggle-mobile" role="button" aria-labelledby="menu-mobile">
+        <span></span><span></span><span></span>
       </div>
-    </header>
-
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#背景">背景</a></li>
-        <li><a href="#遇到的问题">遇到的问题</a>
-          <ul>
-            <li><a href="#一-yuv-如何转bgra">一 、YUV 如何转BGRA</a></li>
-            <li><a href="#二如何正确的创建与拷贝cvpixelbuffer">二、如何正确的创建与拷贝CVPixelBuffer</a></li>
-            <li><a href="#三如何把metal渲染的纹理转为cvpixelbuffer">三、如何把Metal渲染的纹理转为CVPixelBuffer</a></li>
-            <li><a href="#四使用-gpuimagerawdataoutput-做后处理">四、使用 GPUImageRawDataOutput 做后处理</a></li>
-            <li><a href="#总结">总结</a></li>
-          </ul>
-        </li>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="menu-item"><a class="menu-link" href="/">Home</a></li><li class="menu-item"><a class="menu-link" href="/post/">Archives</a></li><li class="menu-item"><a class="menu-link" href="/tags/">Tags</a></li><li class="menu-item"><a class="menu-link" href="/categories/">Categories</a></li><li class="menu-item menu-system"></li>
       </ul>
-    </li>
-  </ul>
-</nav>
+    </nav>
   </div>
-</div>
-    <div class="post-content">
-      <blockquote>
+</header><main class="fi-container"><article class="page single special">
+    <div class="header"><h1 class="single-title animate__animated animate__pulse animate__faster">CVPixelbuffer与Flutter外接纹理</h1></div><div class="content" id="content"><blockquote>
 <p>A Core Video pixel buffer is an image buffer that holds pixels in main memory. Applications generating frames, compressing or decompressing video, or using Core Image can all make use of Core Video pixel buffers.</p>
 </blockquote>
-<h2 id="背景">背景</h2>
-<p>最近遇到一个问题，如何把一个<code>mp4</code>格式的灰度视频后处理上色后再给到Flutter渲染？
-<img src="/image/cvpixel/01.jpeg" alt="img1">
-<img src="/image/cvpixel/02.jpeg" alt="img2"></p>
+<h2 class="heading-element" id="背景"><span>背景</span>
+  <a href="#%e8%83%8c%e6%99%af" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>最近遇到一个问题，如何把一个<code>mp4</code>格式的灰度视频后处理上色后再给到Flutter渲染？
+<img loading="lazy" src='/image/cvpixel/01.jpeg' alt="img1">
+<img loading="lazy" src='/image/cvpixel/02.jpeg' alt="img2"></p>
 <p>先来看一下整体的流程：</p>
-<p><img src="/image/cvpixel/07.png" alt="render"></p>
+<p><img loading="lazy" src='/image/cvpixel/07.png' alt="render"></p>
 <ol>
 <li>
 <p>首先无论我们使用哪一种解码器，通常来说<code>mp4</code>格式的视频都会解码成YUV数据;</p>
@@ -193,7 +116,7 @@
 <p>在Flutter引擎对图层做光栅化之前，提交纹理数据，提交的纹理数据会提交给到Skia的Canvas，然后Flutter会通过统一的GraphicShell来提交渲染上屏</p>
 </li>
 </ol>
-<p><img src="/image/cvpixel/06.png" alt="render"></p>
+<p><img loading="lazy" src='/image/cvpixel/06.png' alt="render"></p>
 <p>看完这个流程，如果是对这类应用熟悉一点的同学就已经可以发现两个优化点了，但是因为这并不在本文着重的范畴内，所以先给出解答</p>
 <ol>
 <li>
@@ -205,16 +128,22 @@
 <li>
 <p>Flutter外接纹理如果支持直接GPU读纹理，则可以省去后面GPU-&gt;CPU-&gt;GPU的拷贝。</p>
 <blockquote>
-<p>对于Flutter来说，Graphic Shell是图形引擎上抽象的一层，此处设计为传纹理数据而不是直接传纹理ID，我猜测是因为底层的图形引擎是可能会变化的，今天是openGL，明天就有可能用Metal,使用CVPixelBufferCopy的方式，可以保证灵活性，但是性能确实堪忧。这部分在<a href="https://cloud.tencent.com/developer/article/1687997">这篇文章</a>也有补充阐述优化的方案</p>
+<p>对于Flutter来说，Graphic Shell是图形引擎上抽象的一层，此处设计为传纹理数据而不是直接传纹理ID，我猜测是因为底层的图形引擎是可能会变化的，今天是openGL，明天就有可能用Metal,使用CVPixelBufferCopy的方式，可以保证灵活性，但是性能确实堪忧。这部分在<a href="https://cloud.tencent.com/developer/article/1687997"target="_blank" rel="external nofollow noopener noreferrer">这篇文章</a>也有补充阐述优化的方案</p>
 </blockquote>
 </li>
 </ol>
 </li>
 </ol>
-<h2 id="遇到的问题">遇到的问题</h2>
-<p>在实现上述方案的过程中，总不是一帆风顺，这也促成了我想写本文的原因，如果有同样的踩坑的人，希望能节省大家的一些时间</p>
-<h3 id="一-yuv-如何转bgra">一 、YUV 如何转BGRA</h3>
-<p>这一步虽然没有做，但是仍然值得探究一下，下面给出两个方案：</p>
+<h2 class="heading-element" id="遇到的问题"><span>遇到的问题</span>
+  <a href="#%e9%81%87%e5%88%b0%e7%9a%84%e9%97%ae%e9%a2%98" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>在实现上述方案的过程中，总不是一帆风顺，这也促成了我想写本文的原因，如果有同样的踩坑的人，希望能节省大家的一些时间</p>
+<h3 class="heading-element" id="一-yuv-如何转bgra"><span>一 、YUV 如何转BGRA</span>
+  <a href="#%e4%b8%80-yuv-%e5%a6%82%e4%bd%95%e8%bd%acbgra" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>这一步虽然没有做，但是仍然值得探究一下，下面给出两个方案：</p>
 <ol>
 <li>
 <p>逐像素转换，YUV在存储上有YUV420、YUV422等几种格式，我们可以根据以下公式逐像素转换到对应的Bitmap里，具体公式如下：</p>
@@ -227,8 +156,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-mathematica" data-lang="mathematica"><span class="line"><span class="cl"><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.164</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">2.018</span><span class="p">(</span><span class="n">U</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">128</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">G</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.164</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">0.813</span><span class="p">(</span><span class="n">V</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">128</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">0.391</span><span class="p">(</span><span class="n">U</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">128</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.164</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1.596</span><span class="p">(</span><span class="n">V</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">128</span><span class="p">)</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.164</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1.596</span><span class="p">(</span><span class="n">V</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">128</span><span class="p">)</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>这个方式的问题在于效率较低。</p>
 </li>
@@ -265,8 +193,7 @@
 </span></span><span class="line"><span class="cl">                <span class="mo">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">.392</span><span class="p">,</span> <span class="mf">2.017</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">                <span class="mf">1.596</span><span class="p">,</span> <span class="o">-</span><span class="mf">.813</span><span class="p">,</span><span class="mo">0</span> <span class="p">)</span> <span class="o">*</span> <span class="n">yuv</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">gl_FragColor</span> <span class="o">=</span> <span class="k">vec4</span><span class="p">(</span><span class="n">rgb</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -277,17 +204,19 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-objective-c" data-lang="objective-c"><span class="line"><span class="cl"><span class="c1">//使用v_Image
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nl">https</span><span class="p">:</span><span class="c1">//gist.github.com/noppefoxwolf/26967db43fdd87662f37d2f73c863eb9
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">这个链接给出一个参考实现</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">这个链接给出一个参考实现</span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 </ol>
-<h3 id="二如何正确的创建与拷贝cvpixelbuffer">二、如何正确的创建与拷贝CVPixelBuffer</h3>
-<p>在拿到原始的BGRA数据后，下一步是要把他转换为CVPixelBuffer，可选的方法有两个，一个是使用CVPixelBufferCreateWithBytes、另一个是CVPixelBufferCreate。在这里遇到两个问题</p>
+<h3 class="heading-element" id="二如何正确的创建与拷贝cvpixelbuffer"><span>二、如何正确的创建与拷贝CVPixelBuffer</span>
+  <a href="#%e4%ba%8c%e5%a6%82%e4%bd%95%e6%ad%a3%e7%a1%ae%e7%9a%84%e5%88%9b%e5%bb%ba%e4%b8%8e%e6%8b%b7%e8%b4%9dcvpixelbuffer" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>在拿到原始的BGRA数据后，下一步是要把他转换为CVPixelBuffer，可选的方法有两个，一个是使用CVPixelBufferCreateWithBytes、另一个是CVPixelBufferCreate。在这里遇到两个问题</p>
 <ol>
 <li>
 <p><strong>使用CVPixelBufferCreateWithBytes创建的纹理显示正确，但是后续无法映射到GPU纹理，系统报错error -6683，也无法提交到Flutter渲染</strong></p>
-<p>这个问题的原因是要创建GPU可访问的纹理，必须要设置支持IOSurface可访问。<a href="https://developer.apple.com/library/archive/qa/qa1781/_index.html">这篇文档</a>对这个问题做了初步的解释。</p>
+<p>这个问题的原因是要创建GPU可访问的纹理，必须要设置支持IOSurface可访问。<a href="https://developer.apple.com/library/archive/qa/qa1781/_index.html"target="_blank" rel="external nofollow noopener noreferrer">这篇文档</a>对这个问题做了初步的解释。</p>
 <blockquote>
 <p>Share hardware-accelerated buffer data (framebuffers and textures) across multiple processes. Manage image memory more efficiently.</p>
 </blockquote>
@@ -322,14 +251,13 @@
 </span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">texture_ref_</span><span class="p">.</span><span class="n">Reset</span><span class="p">(</span><span class="n">texture</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里的CVOpenGLESTextureCacheCreateTextureFromImage所创建的纹理就是直接映射到我们创建的CVPixebuffer的。</p>
 </li>
 <li>
 <p><strong>CVPixelBufferCreate创建的纹理显示不正确，出现花屏</strong></p>
-<p><img src="/image/cvpixel/05.png" alt="5"></p>
+<p><img loading="lazy" src='/image/cvpixel/05.png' alt="5"></p>
 <p>使用CVPixelBufferCreate创建的纹理，需要手动获取基地址，然后把图像数据拷贝进去。在这之前，我们先设置好pixelbuffer的属性：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -354,8 +282,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="cp">#if TARGET_OS_IPHONE
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>       <span class="p">(</span><span class="k">__bridge</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nl">kCVPixelBufferOpenGLESCompatibilityKey</span><span class="p">:</span> <span class="m">@YES</span><span class="p">,</span> <span class="c1">// OpenGL可访问
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="cp">#endif
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="l">}</span><span class="p">;</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="l">}</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后就可以开始创建CVPixelBuffer:</p>
 <div class="highlight"><div class="chroma">
@@ -375,8 +302,7 @@
 </span></span><span class="line"><span class="cl">                       <span class="n">height</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">                       <span class="n">kCVPixelFormatType_32BGRA</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">                       <span class="p">(</span><span class="k">__bridge</span>  <span class="n">CFDictionaryRef</span><span class="p">)</span><span class="n">pixelBufferAttributes</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                       <span class="o">&amp;</span><span class="n">pixelbuffer</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">                       <span class="o">&amp;</span><span class="n">pixelbuffer</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>在这一步后面，直接把原始的BGRA拷贝进去，就会出现上面的花屏问题。原因是因为iOS要求图像宽度必须能被16整除，那么如果我们传入一个1080的图像，他实际在内存中的宽度为1088。所以，我们需要按照图像可对其的方式去拷贝：</p>
 <div class="highlight"><div class="chroma">
@@ -422,15 +348,17 @@
 </span></span><span class="line"><span class="cl">    <span class="n">dst</span> <span class="o">+=</span> <span class="n">dstLinesize</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">src</span> <span class="o">+=</span> <span class="n">srcLinesize</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>这样就可以解决内存拷贝时不对齐的问题。</p>
 </li>
 </ol>
-<h3 id="三如何把metal渲染的纹理转为cvpixelbuffer">三、如何把Metal渲染的纹理转为CVPixelBuffer</h3>
-<p>Metal的目的之一，就是减少图形渲染管线在CPU的开销，并且能够在一次绘制指令提交尽可能多的任务。关于Metal的详细介绍可以查阅<a href="https://developer.apple.com/library/archive/documentation/Miscellaneous/Conceptual/MetalProgrammingGuide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40014221-CH1-SW1">官方文档</a>，此处并不赘述，下图给出Metal的渲染流水：</p>
-<p><img src="/image/cvpixel/03.png" alt="3"></p>
+<h3 class="heading-element" id="三如何把metal渲染的纹理转为cvpixelbuffer"><span>三、如何把Metal渲染的纹理转为CVPixelBuffer</span>
+  <a href="#%e4%b8%89%e5%a6%82%e4%bd%95%e6%8a%8ametal%e6%b8%b2%e6%9f%93%e7%9a%84%e7%ba%b9%e7%90%86%e8%bd%ac%e4%b8%bacvpixelbuffer" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>Metal的目的之一，就是减少图形渲染管线在CPU的开销，并且能够在一次绘制指令提交尽可能多的任务。关于Metal的详细介绍可以查阅<a href="https://developer.apple.com/library/archive/documentation/Miscellaneous/Conceptual/MetalProgrammingGuide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40014221-CH1-SW1"target="_blank" rel="external nofollow noopener noreferrer">官方文档</a>，此处并不赘述，下图给出Metal的渲染流水：</p>
+<p><img loading="lazy" src='/image/cvpixel/03.png' alt="3"></p>
 <p>由于我使用的后处理引擎是基于Metal实现的，所以这里就需要提取Metal纹理中的数据。通常来说，我们只需要把数据从GPU转移到CPU就可以了，此处可以考虑使用下面这个接口来做</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -445,8 +373,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm"> @method getBytes:bytesPerRow:fromRegion:mipmapLevel:
 </span></span></span><span class="line"><span class="cl"><span class="cm"> @abstract Convenience for getBytes:bytesPerRow:bytesPerImage:fromRegion:mipmapLevel:slice: that doesn&#39;t require slice related arguments
 </span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
-</span></span><span class="line"><span class="cl"><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">getBytes:</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="nv">pixelBytes</span> <span class="nf">bytesPerRow:</span><span class="p">(</span><span class="n">NSUInteger</span><span class="p">)</span><span class="nv">bytesPerRow</span> <span class="nf">fromRegion:</span><span class="p">(</span><span class="n">MTLRegion</span><span class="p">)</span><span class="nv">region</span> <span class="nf">mipmapLevel:</span><span class="p">(</span><span class="n">NSUInteger</span><span class="p">)</span><span class="nv">level</span><span class="p">;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">getBytes:</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="nv">pixelBytes</span> <span class="nf">bytesPerRow:</span><span class="p">(</span><span class="n">NSUInteger</span><span class="p">)</span><span class="nv">bytesPerRow</span> <span class="nf">fromRegion:</span><span class="p">(</span><span class="n">MTLRegion</span><span class="p">)</span><span class="nv">region</span> <span class="nf">mipmapLevel:</span><span class="p">(</span><span class="n">NSUInteger</span><span class="p">)</span><span class="nv">level</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>但是这里却不建议这么做，原因在于Metal在处理纹理数据的时候，为了性能以及带宽的优化，对纹理数据做了压缩，当用这个接口提取纹理数据时到内存中时，需要先把纹理做一次解压缩。解决办法有下面两个：</p>
 <ol>
@@ -454,9 +381,12 @@
 <li>设置 <code>allowGPUOptimizedContents</code>属性为<code> NO</code>，顾名思义，等于说为了CPU的访问友好，而舍弃GPU的性能。</li>
 </ol>
 <p>我使用了方案一之后，性能确实有所提升，但是数据却无法对其，始终有花屏，最后这个问题由于无法定位，舍弃了这个方案。</p>
-<p><img src="/image/cvpixel/04.png" alt="4"></p>
-<h3 id="四使用-gpuimagerawdataoutput-做后处理">四、使用 GPUImageRawDataOutput 做后处理</h3>
-<p>思考一下，我们的目标是给灰度视频上色，支持自定义滤镜的GPUIMage也是一个选择。在花了比较多时间都无法解决上面的问题后，我尝试重新实现了一下这个滤镜，glsl的代码不难，这里不给出实现了。我们的重点在于拿出GPUImage渲染的纹理数据提交给Flutter渲染。在这里我们使用GPUImageRawDataOutput来实现：</p>
+<p><img loading="lazy" src='/image/cvpixel/04.png' alt="4"></p>
+<h3 class="heading-element" id="四使用-gpuimagerawdataoutput-做后处理"><span>四、使用 GPUImageRawDataOutput 做后处理</span>
+  <a href="#%e5%9b%9b%e4%bd%bf%e7%94%a8-gpuimagerawdataoutput-%e5%81%9a%e5%90%8e%e5%a4%84%e7%90%86" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>思考一下，我们的目标是给灰度视频上色，支持自定义滤镜的GPUIMage也是一个选择。在花了比较多时间都无法解决上面的问题后，我尝试重新实现了一下这个滤镜，glsl的代码不难，这里不给出实现了。我们的重点在于拿出GPUImage渲染的纹理数据提交给Flutter渲染。在这里我们使用GPUImageRawDataOutput来实现：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -504,119 +434,20 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">uint8_t</span> <span class="o">*</span><span class="n">dstBuffer</span> <span class="o">=</span> <span class="p">(</span><span class="n">uint8_t</span> <span class="o">*</span><span class="p">)</span><span class="n">CVPixelBufferGetBaseAddress</span><span class="p">(</span><span class="n">pixelbuffer</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 拷贝进去
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">memcpy</span><span class="p">(</span><span class="n">dstBuffer</span><span class="p">,</span> <span class="n">output</span><span class="p">.</span><span class="n">rawBytesForImage</span><span class="p">,</span> <span class="n">output</span><span class="p">.</span><span class="n">bytesPerRowInOutput</span><span class="o">*</span><span class="n">height</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">output</span> <span class="n">unlockFramebufferAfterReading</span><span class="p">];</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">output</span> <span class="n">unlockFramebufferAfterReading</span><span class="p">];</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="总结">总结</h3>
-<p>原本想着只是一个简简单单的需求，但是却没有想到在图像在CPU-GPU之间拷贝的过程中遇到了不少问题，在问题的解决上，一方面建议多了解系统底层实现与原理，另一方面也要对图像格式，音视频处理更加熟悉。</p>
-
-    </div>
-
-    <div class="post-copyright">
-  <p class="copyright-item">
-    <span class="item-title">文章作者</span>
-    <span class="item-content">yingxinsong</span>
-  </p>
-  <p class="copyright-item">
-    <span class="item-title">上次更新</span>
-    <span class="item-content">
-        2022-03-18
-        
-    </span>
-  </p>
-  
-  
-</div>
-<footer class="post-footer">
-      
-      <nav class="post-nav">
-        <a class="prev" href="/post/optimize_iap_purchase/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">移动端支付链路优化指南</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        <a class="next" href="/post/what-i-learned-from-2021/">
-            <span class="next-text nav-default">2021年度总结</span>
-            <span class="next-text nav-mobile">下一篇</span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
-        </div>
-        <div id="disqus_thread"></div>
-    <script type="text/javascript">
-    (function() {
-      
-      
-      if (window.location.hostname === 'localhost') return;
-
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      var disqus_shortname = 'yingxinsong';
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-  
-
-  
-
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-      <a href="mailto:me@yingxinsong.com" class="iconfont icon-email" title="email"></a>
-  <a href="https://www.yingxinsong.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
-</div>
-
-<div class="copyright">
- 
-
-  
-
-  <span class="copyright-year">
-    &copy; 
-    2021 - 
-    2024<span class="heart"><i class="iconfont icon-heart"></i></span><span>yingxinsong</span>
-  </span>
-</div>
-
-    </footer>
-
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
-    </div>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script><script></script><script src="https://cdn.jsdelivr.net/npm/raphael@2.2.7/raphael.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script> <script src="https://cdn.jsdelivr.net/npm/flowchart.js@1.8.0/release/flowchart.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script><script src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script> <script src="https://cdn.jsdelivr.net/npm/snapsvg@0.5.1/dist/snap.svg-min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script> <script src="https://cdn.jsdelivr.net/npm/underscore@1.8.3/underscore-min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script> <script src="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-
-
-
-<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'G-GC5VY37CS4', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-
-
-
-
-</body>
+</div><h3 class="heading-element" id="总结"><span>总结</span>
+  <a href="#%e6%80%bb%e7%bb%93" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>原本想着只是一个简简单单的需求，但是却没有想到在图像在CPU-GPU之间拷贝的过程中遇到了不少问题，在问题的解决上，一方面建议多了解系统底层实现与原理，另一方面也要对图像格式，音视频处理更加熟悉。</p>
+</div></article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.152.2"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.4.0-alpha.3-20251128065536-6d00e42b"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">
+              <a href="/">john</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons"><div class="fixed-button back-to-top animate__faster d-none" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">该网站在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="/js/config/e4f0e54b3ad21850c91f2e4d77b56069.js" defer></script><script src="/js/theme.min.js" defer></script></body>
 </html>

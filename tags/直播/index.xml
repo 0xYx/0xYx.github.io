@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>直播 on Kapuseru</title>
+    <title>直播 - 标签 - Kapuseru</title>
     <link>https://www.yingxinsong.com/tags/%E7%9B%B4%E6%92%AD/</link>
-    <description>Recent content in 直播 on Kapuseru</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <description>カプセル</description>
+    <generator>Hugo 0.152.2 &amp; FixIt v0.4.0-alpha.3-20251128065536-6d00e42b</generator>
+    <language>zh-cn</language>
     <lastBuildDate>Thu, 02 Dec 2021 17:22:23 +0800</lastBuildDate>
     <atom:link href="https://www.yingxinsong.com/tags/%E7%9B%B4%E6%92%AD/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -13,7 +13,7 @@
       <link>https://www.yingxinsong.com/post/build_live_center/</link>
       <pubDate>Thu, 02 Dec 2021 17:22:23 +0800</pubDate>
       <guid>https://www.yingxinsong.com/post/build_live_center/</guid>
-      <description>前言 自从头条搭上短视频这条快车道，做出了抖音这款风靡全世界的现象级产品。人们不禁都在想，他们到底用了什么技术？为什么头条能成功？其中不乏有神</description>
+      <description>&lt;h3 class=&#34;heading-element&#34; id=&#34;前言&#34;&gt;&lt;span&gt;前言&lt;/span&gt;&#xA;  &lt;a href=&#34;#%e5%89%8d%e8%a8%80&#34; class=&#34;heading-mark&#34;&gt;&#xA;    &lt;svg class=&#34;octicon octicon-link&#34; viewBox=&#34;0 0 16 16&#34; version=&#34;1.1&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h3&gt;&lt;p&gt;自从头条搭上短视频这条快车道，做出了抖音这款风靡全世界的现象级产品。人们不禁都在想，他们到底用了什么技术？为什么头条能成功？其中不乏有神化创始人的，也有真的去探究背后的技术的。我身为所谓”竞争对手“公司的一份子，也不免常常被安利。其中听得最多的就是&amp;quot;中台&amp;quot;二字。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
