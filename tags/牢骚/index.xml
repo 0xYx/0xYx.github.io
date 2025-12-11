@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>牢骚 - 标签 - Kapuseru</title>
-    <link>https://www.yingxinsong.com/tags/%E7%89%A2%E9%AA%9A/</link>
+    <link>http://localhost:1313/tags/%E7%89%A2%E9%AA%9A/</link>
     <description>カプセル</description>
     <generator>Hugo 0.152.2 &amp; FixIt v0.4.0-alpha.3-20251128065536-6d00e42b</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 30 Sep 2021 17:22:36 +0800</lastBuildDate>
-    <atom:link href="https://www.yingxinsong.com/tags/%E7%89%A2%E9%AA%9A/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/%E7%89%A2%E9%AA%9A/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>工程师自检手册</title>
-      <link>https://www.yingxinsong.com/post/hiring/</link>
+      <link>http://localhost:1313/post/hiring/</link>
       <pubDate>Thu, 30 Sep 2021 17:22:36 +0800</pubDate>
-      <guid>https://www.yingxinsong.com/post/hiring/</guid>
+      <guid>http://localhost:1313/post/hiring/</guid>
       <description>&lt;p&gt;在这个职场中，我觉得每一个单纯的工程师都应该有一个要做与不要做的手册，每次头脑发热做事情的时候，应该拿出来自检一下。下面，就是我从很多地方吸收的&amp;quot;办公室真理&amp;quot;，当然，后面也许还会收集更多：&lt;/p&gt;</description>
     </item>
   </channel>
