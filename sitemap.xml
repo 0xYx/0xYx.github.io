@@ -1,115 +1,109 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://www.yingxinsong.com/</loc>
     <lastmod>2024-10-11T16:06:08+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/post/</loc>
+    <loc>https://www.yingxinsong.com/post/</loc>
     <lastmod>2024-10-11T16:06:08+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/post/lake_biwa_fishing/</loc>
+    <loc>https://www.yingxinsong.com/post/lake_biwa_fishing/</loc>
     <lastmod>2024-10-11T16:06:08+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/post/2023/</loc>
+    <loc>https://www.yingxinsong.com/post/2023/</loc>
     <lastmod>2024-01-29T15:05:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/post/fishing_plan_2024/</loc>
+    <loc>https://www.yingxinsong.com/post/fishing_plan_2024/</loc>
     <lastmod>2023-10-19T10:14:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/post/grow_up_with_pain/</loc>
+    <loc>https://www.yingxinsong.com/post/grow_up_with_pain/</loc>
     <lastmod>2023-10-17T00:56:37+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/post/how_to_improve_web_experience/</loc>
-    <lastmod>2023-06-06T13:31:04+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>http://localhost:1313/post/optimize_iap_purchase/</loc>
+    <loc>https://www.yingxinsong.com/post/optimize_iap_purchase/</loc>
     <lastmod>2022-11-30T16:38:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/post/cvpixelbuffer/</loc>
+    <loc>https://www.yingxinsong.com/post/cvpixelbuffer/</loc>
     <lastmod>2022-03-18T16:39:41+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/post/what-i-learned-from-2021/</loc>
+    <loc>https://www.yingxinsong.com/post/what-i-learned-from-2021/</loc>
     <lastmod>2021-12-22T16:19:08+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://www.yingxinsong.com/tags/</loc>
     <lastmod>2021-12-02T17:22:23+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/</loc>
+    <loc>https://www.yingxinsong.com/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/</loc>
     <lastmod>2021-12-02T17:22:23+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/tags/%E7%9B%B4%E6%92%AD/</loc>
+    <loc>https://www.yingxinsong.com/tags/%E7%9B%B4%E6%92%AD/</loc>
     <lastmod>2021-12-02T17:22:23+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/post/build_live_center/</loc>
+    <loc>https://www.yingxinsong.com/post/build_live_center/</loc>
     <lastmod>2021-12-02T17:22:23+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/post/hiring/</loc>
+    <loc>https://www.yingxinsong.com/post/hiring/</loc>
     <lastmod>2021-09-30T17:22:36+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/tags/%E7%89%A2%E9%AA%9A/</loc>
+    <loc>https://www.yingxinsong.com/tags/%E7%89%A2%E9%AA%9A/</loc>
     <lastmod>2021-09-30T17:22:36+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/tags/%E9%80%86%E5%90%91/</loc>
+    <loc>https://www.yingxinsong.com/tags/%E9%80%86%E5%90%91/</loc>
     <lastmod>2021-09-28T12:36:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/post/unity3d-decrypt/</loc>
+    <loc>https://www.yingxinsong.com/post/unity3d-decrypt/</loc>
     <lastmod>2021-09-28T12:36:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://www.yingxinsong.com/categories/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

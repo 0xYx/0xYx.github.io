@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="zh-cn">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
@@ -13,7 +13,7 @@
 序 ​	一个用户流失的可能性有很多种，不过我相信你最不愿意的就是他在支付、购买的过程中流失。一方面，付费的用户往往粘性更高，停留时间更长，这对产品的指标是有帮助的；而另一方面，既然用户发起了支付，那么就说明他有购买的意愿，也证明了你的想法是成功的，可商业化的。但是现实往往并不那么让人满意，实际上在整个支付的链路上，有相当一部分的用户由于各种原因流失了，本文主要阐述我是如何分析以及优化这些指标的。">
   <meta itemprop="datePublished" content="2022-11-30T16:38:55+08:00">
   <meta itemprop="dateModified" content="2022-11-30T16:38:55+08:00">
-  <meta itemprop="wordCount" content="6698"><meta property="og:url" content="http://localhost:1313/post/optimize_iap_purchase/">
+  <meta itemprop="wordCount" content="6698"><meta property="og:url" content="https://www.yingxinsong.com/post/optimize_iap_purchase/">
   <meta property="og:site_name" content="Kapuseru">
   <meta property="og:title" content="移动端支付链路优化指南">
   <meta property="og:description" content="TL;DR
@@ -31,7 +31,7 @@
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="http://localhost:1313/post/optimize_iap_purchase/" title="移动端支付链路优化指南 - Kapuseru" /><link rel="prev" type="text/html" href="http://localhost:1313/post/cvpixelbuffer/" title="CVPixelbuffer与Flutter外接纹理" /><link rel="next" type="text/html" href="http://localhost:1313/post/how_to_improve_web_experience/" title="移动端Web页面优化指南" /><link rel="stylesheet" href="/css/config.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://www.yingxinsong.com/post/optimize_iap_purchase/" title="移动端支付链路优化指南 - Kapuseru" /><link rel="prev" type="text/html" href="https://www.yingxinsong.com/post/cvpixelbuffer/" title="CVPixelbuffer与Flutter外接纹理" /><link rel="next" type="text/html" href="https://www.yingxinsong.com/post/grow_up_with_pain/" title="大厂职级晋升指南" /><link rel="stylesheet" href="/css/config.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -41,9 +41,9 @@
     "inLanguage": "zh-cn",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/post\/optimize_iap_purchase\/"
+      "@id": "https:\/\/www.yingxinsong.com\/post\/optimize_iap_purchase\/"
     },"genre": "post","wordcount":  6698 ,
-    "url": "http:\/\/localhost:1313\/post\/optimize_iap_purchase\/","datePublished": "2022-11-30T16:38:55+08:00","dateModified": "2022-11-30T16:38:55+08:00","publisher": {
+    "url": "https:\/\/www.yingxinsong.com\/post\/optimize_iap_purchase\/","datePublished": "2022-11-30T16:38:55+08:00","dateModified": "2022-11-30T16:38:55+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
