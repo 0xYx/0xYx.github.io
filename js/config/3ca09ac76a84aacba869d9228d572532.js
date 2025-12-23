@@ -1,0 +1,1 @@
+window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"version":"v0.4.0-alpha.3-20251128065536-6d00e42b"};console.log('Page config:', window.config);
