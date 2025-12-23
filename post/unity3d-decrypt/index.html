@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="zh-cn">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
@@ -12,7 +12,7 @@
   <meta itemprop="datePublished" content="2021-09-28T12:36:50+08:00">
   <meta itemprop="dateModified" content="2021-09-28T12:36:50+08:00">
   <meta itemprop="wordCount" content="2164">
-  <meta itemprop="keywords" content="逆向"><meta property="og:url" content="http://localhost:1313/post/unity3d-decrypt/">
+  <meta itemprop="keywords" content="逆向"><meta property="og:url" content="https://www.yingxinsong.com/post/unity3d-decrypt/">
   <meta property="og:site_name" content="Kapuseru">
   <meta property="og:title" content="逆向Unity3D Asset Bundle">
   <meta property="og:description" content="前几个月因为项目的原因，想要看一下一个售卖3D手办的软件是怎么实现的，并且想看看有没有能力获取到里面的3D模型。拿到安装包之后，还是按照惯例直接砸壳调试分析了一下：">
@@ -29,7 +29,7 @@
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="http://localhost:1313/post/unity3d-decrypt/" title="逆向Unity3D Asset Bundle - Kapuseru" /><link rel="next" type="text/html" href="http://localhost:1313/post/hiring/" title="工程师自检手册" /><link rel="stylesheet" href="/css/config.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://www.yingxinsong.com/post/unity3d-decrypt/" title="逆向Unity3D Asset Bundle - Kapuseru" /><link rel="next" type="text/html" href="https://www.yingxinsong.com/post/hiring/" title="工程师自检手册" /><link rel="stylesheet" href="/css/config.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -39,9 +39,9 @@
     "inLanguage": "zh-cn",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/post\/unity3d-decrypt\/"
+      "@id": "https:\/\/www.yingxinsong.com\/post\/unity3d-decrypt\/"
     },"genre": "post","keywords": "逆向","wordcount":  2164 ,
-    "url": "http:\/\/localhost:1313\/post\/unity3d-decrypt\/","datePublished": "2021-09-28T12:36:50+08:00","dateModified": "2021-09-28T12:36:50+08:00","publisher": {
+    "url": "https:\/\/www.yingxinsong.com\/post\/unity3d-decrypt\/","datePublished": "2021-09-28T12:36:50+08:00","dateModified": "2021-09-28T12:36:50+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -239,13 +239,13 @@
 <pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">po</span> <span class="p">[[</span><span class="n">NSData</span> <span class="n">dataWithBytes</span><span class="p">:(</span><span class="n">id</span><span class="p">)</span><span class="mh">0x0000000139a25000</span> <span class="n">length</span><span class="p">:</span><span class="mh">0x43563a</span><span class="p">]</span> <span class="n">writeToFile</span><span class="p">:</span><span class="err">@</span><span class="s2">&#34;/var/mobile/Containers/Data/Application/5520D425-CA51-47FB-AF93-172E1C2258CB/Documents/veve.ab&#34;</span> <span class="n">atomically</span><span class="p">:</span><span class="n">YES</span><span class="p">]</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>到此我就拿到了<code>veve.ab</code>这个Unity文件，成功。</p>
-</div></article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.152.2"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.4.0-alpha.3-20251128065536-6d00e42b"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
-        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
-            <span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">
-              <a href="/">john</a></span></div></div>
-  </footer></div><div class="widgets"><div class="fixed-buttons"><div class="fixed-button back-to-top animate__faster d-none" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><noscript>
+</div><div id="comments"><div id="valine" class="comment"></div><noscript>
+        Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/" rel="external nofollow noopener noreferrer">Valine</a>.
+      </noscript></div></article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2025</span><span class="license footer-divider">カプセル</span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons"><div class="fixed-button back-to-top animate__faster d-none" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i></div><div class="fixed-button view-comments d-none" role="button" aria-label="查看评论"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><noscript>
     <div class="noscript-warning">该网站在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
-</div><script src="/js/config/518449491a718ae12af6fc0ef9cdfeab.js" defer></script><script src="/js/theme.min.js" defer></script></body>
+</div><link rel="stylesheet" href="/lib/valine/valine.min.css"><script src="/lib/valine/Valine.min.js"></script><script src="/js/config/518449491a718ae12af6fc0ef9cdfeab.js" defer></script><script src="/js/theme.min.js" defer></script></body>
 </html>

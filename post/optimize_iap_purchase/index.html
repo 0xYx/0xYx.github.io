@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="zh-cn">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
@@ -13,7 +13,7 @@
 序 ​	一个用户流失的可能性有很多种，不过我相信你最不愿意的就是他在支付、购买的过程中流失。一方面，付费的用户往往粘性更高，停留时间更长，这对产品的指标是有帮助的；而另一方面，既然用户发起了支付，那么就说明他有购买的意愿，也证明了你的想法是成功的，可商业化的。但是现实往往并不那么让人满意，实际上在整个支付的链路上，有相当一部分的用户由于各种原因流失了，本文主要阐述我是如何分析以及优化这些指标的。">
   <meta itemprop="datePublished" content="2022-11-30T16:38:55+08:00">
   <meta itemprop="dateModified" content="2022-11-30T16:38:55+08:00">
-  <meta itemprop="wordCount" content="6698"><meta property="og:url" content="http://localhost:1313/post/optimize_iap_purchase/">
+  <meta itemprop="wordCount" content="6698"><meta property="og:url" content="https://www.yingxinsong.com/post/optimize_iap_purchase/">
   <meta property="og:site_name" content="Kapuseru">
   <meta property="og:title" content="移动端支付链路优化指南">
   <meta property="og:description" content="TL;DR
@@ -31,7 +31,7 @@
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="http://localhost:1313/post/optimize_iap_purchase/" title="移动端支付链路优化指南 - Kapuseru" /><link rel="prev" type="text/html" href="http://localhost:1313/post/cvpixelbuffer/" title="CVPixelbuffer与Flutter外接纹理" /><link rel="next" type="text/html" href="http://localhost:1313/post/how_to_improve_web_experience/" title="移动端Web页面优化指南" /><link rel="stylesheet" href="/css/config.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://www.yingxinsong.com/post/optimize_iap_purchase/" title="移动端支付链路优化指南 - Kapuseru" /><link rel="prev" type="text/html" href="https://www.yingxinsong.com/post/cvpixelbuffer/" title="CVPixelbuffer与Flutter外接纹理" /><link rel="next" type="text/html" href="https://www.yingxinsong.com/post/grow_up_with_pain/" title="大厂职级晋升指南" /><link rel="stylesheet" href="/css/config.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -41,9 +41,9 @@
     "inLanguage": "zh-cn",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/post\/optimize_iap_purchase\/"
+      "@id": "https:\/\/www.yingxinsong.com\/post\/optimize_iap_purchase\/"
     },"genre": "post","wordcount":  6698 ,
-    "url": "http:\/\/localhost:1313\/post\/optimize_iap_purchase\/","datePublished": "2022-11-30T16:38:55+08:00","dateModified": "2022-11-30T16:38:55+08:00","publisher": {
+    "url": "https:\/\/www.yingxinsong.com\/post\/optimize_iap_purchase\/","datePublished": "2022-11-30T16:38:55+08:00","dateModified": "2022-11-30T16:38:55+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -627,13 +627,13 @@
 </h2><p><img loading="lazy" src='/image/iap/12.jpg' alt="moneyball"></p>
 <p>2011年有一个电影叫做<strong>MoneyBall</strong>，中文名翻译为<strong>点球成金</strong>，讲述了由布拉德·皮特主演的比利·比恩带领的奥克兰运动家队，在认识了耶鲁大学经济学硕士彼得（上图右）后，掌握了破解职业棒球联赛的金钥匙——通过数据分析来改变球队运营的策略，用数学建模的方式，选用能得分的球员而不仅仅是球探，最终，领导球队获得了历史上最长连胜的故事。</p>
 <p>之所以分享这部电影，是想说明在整个支付链路优化的过程中，数据与指标，它们对技术优化的重要性就像电影里面破解棒球联赛的金钥匙一样重要。数据可以帮助你更深入的理解支付链路损耗背后的原因，而新定义的指标，如用户流失率，杀进程率等，可以帮助你找到新的解决办法。</p>
-</div></article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.152.2"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.4.0-alpha.3-20251128065536-6d00e42b"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
-        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
-            <span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">
-              <a href="/">john</a></span></div></div>
-  </footer></div><div class="widgets"><div class="fixed-buttons"><div class="fixed-button back-to-top animate__faster d-none" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><noscript>
+</div><div id="comments"><div id="valine" class="comment"></div><noscript>
+        Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/" rel="external nofollow noopener noreferrer">Valine</a>.
+      </noscript></div></article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2025</span><span class="license footer-divider">カプセル</span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons"><div class="fixed-button back-to-top animate__faster d-none" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i></div><div class="fixed-button view-comments d-none" role="button" aria-label="查看评论"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><noscript>
     <div class="noscript-warning">该网站在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
-</div><script src="/js/config/53f11bb5d4671ac92d3bac04b06e1499.js" defer></script><script src="/js/theme.min.js" defer></script></body>
+</div><link rel="stylesheet" href="/lib/valine/valine.min.css"><script src="/lib/valine/Valine.min.js"></script><script src="/js/config/53f11bb5d4671ac92d3bac04b06e1499.js" defer></script><script src="/js/theme.min.js" defer></script></body>
 </html>
